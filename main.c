@@ -131,26 +131,21 @@ int main(int argc, char** argv) {
 
     int x[] = {2, 3, 4};
     int y[] = {PERGUNTA};
-    /////////////////////////////////  
+    /////////////////////////////////  TESTES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     //parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
     //fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
     //parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
     //fullList(perguntas, sizeof (Pergunta), 2, estructAuxPerguntas, 5);
+    //int * storage;
+    //int i=2;
+    //getInt(&i,&storage);
+    //printf("%d",storage);
+    //getAtributeValue(perguntas+(sizeof(Pergunta)*0), 8, &storage);
     ////////////////////////
-    printf("%p \n", perguntas);
-    printf("%p \n", &perguntas[0]);
-    printf("%p \n", &perguntas[0] + sizeof (perguntas[0]));
-    printf("%p \n", &perguntas[0] + sizeof (perguntas[0]) + sizeof (perguntas[0]));
-    puts("");
-    printf("%p \n", perguntas);
-    printf("%p \n", &perguntas[0]);
-    printf("%p \n", &perguntas[0]);
-    printf("%p \n", &perguntas[0].id_pergunta+estructAuxPerguntas[0].sizeBytes);
-    puts("");
-    int * storage;
-    getAtributeValue(perguntas[0], 8, &storage);
 
+    
 
+    
     return (EXIT_SUCCESS);
 }
 
