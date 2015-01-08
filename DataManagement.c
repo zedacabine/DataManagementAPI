@@ -1,6 +1,16 @@
 #include "DataManagement.h"
 #include <stdio.h>
 
+void getAtributeValue(void * structElement, const unsigned int atributeNumber, void * storage) {
+
+    printf("%p \n", structElement);
+    printf("%p \n", &structElement + sizeof (structElement[0]));
+    printf("%p \n", &structElement + sizeof (structElement[0]) + sizeof (structElement[0]));
+
+
+
+};
+
 void printString(const void *s) {
     char *val = (char *) s;
     puts(val);
@@ -88,9 +98,9 @@ void parsedList(void *list, const unsigned short stuctTypeSize, FieldAux *aux, i
     }
 }
 
-void readString(void * field, const unsigned int maxSize) {      
+void readString(void * field, const unsigned int maxSize) {
     scanf("%[^\n]s", field);
-    while ( getchar() != '\n' );
+    while (getchar() != '\n');
 
 };
 
@@ -106,9 +116,9 @@ void readChar(void * field) {
     scanf("%c", field);
 }
 
-void read(DataType type, void * field,const unsigned int maxSize) {
+void read(DataType type, void * field, const unsigned int maxSize) {
     if (type == STRING || type == UNSIGNED_INT) {
-        readString(field,maxSize);
+        readString(field, maxSize);
     } else if (type == INT) {
         readInt(field);
     } else if (type == FLOAT) {
@@ -124,7 +134,7 @@ void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) 
     DataType type = aux[i].type;
 
     printString(aux[i].alias);
-    read(type, reg,aux[i].maxSize);
+    read(type, reg, aux[i].maxSize);
     puts("");
 }
 
@@ -153,5 +163,9 @@ void create(const unsigned short stuctTypeSize, void * list, int *contador, Fiel
     (*contador)++;
 
 }
-void update(){};
-void delete(){};
+
+void update() {
+};
+
+void delete() {
+};
