@@ -136,11 +136,8 @@ int main(int argc, char** argv) {
     //fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
     //parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
     //fullList(perguntas, sizeof (Pergunta), 2, estructAuxPerguntas, 5);
-    //int * storage;
-    //int i=2;
-    //getInt(&i,&storage);
-    //printf("%d",storage);
-    //getAtributeValue(perguntas+(sizeof(Pergunta)*0), 8, &storage);
+    int * storage;
+    getAtributeValue(perguntas+(sizeof(Pergunta)*0), 1, &storage);
     ////////////////////////
 
     
