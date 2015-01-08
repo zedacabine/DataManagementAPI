@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
     //parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
     //fullList(perguntas, sizeof (Pergunta), 2, estructAuxPerguntas, 5);
     int * storage;
-    getAtributeValue(perguntas+(sizeof(Pergunta)*0), 1, &storage);
+    getAtributeValue(perguntas[1], 1, &storage);
     ////////////////////////
 
     
