@@ -1,22 +1,26 @@
 #include "DataManagement.h"
 #include <stdio.h>
-/*
-char getString(void *s, void *storage) {
-    char *val = (char *) s;
-    (char *)storage =*val;
-};
 
-int getInt(void *i, void *storage) {
+void getInt(void *i, void *storage) {
     int *val = (int *) i;
-    (int *)storage =*val;
+    int *s = (int*) storage;
+    *s = *val;
+
 };
 
-float getFloat(void *f, void *storage) {
+void getString(void *s, void *storage) {
+    char *val = (char *) s;
+    char *st = (char*) storage;
+    *st = *val;
+};
+
+void getFloat(void *f, void *storage) {
     float *val = (float *) f;
-    (float *)storage =*val;
+    float *s = (float*) storage;
+    *s = *val;
 };
 
-void get(DataType type, void reg, void *storage) {
+void get(DataType type, void *reg, void *storage) {
     if (type == STRING) {
         getString(reg, storage);
     } else if (type == INT) {
@@ -25,6 +29,7 @@ void get(DataType type, void reg, void *storage) {
         getFloat(reg, storage);
     }
 }
+
 
 void getAtributeValue(void * structElement, FieldAux *aux, const unsigned int atributeNumber, void * storage) {
 
@@ -36,10 +41,11 @@ void getAtributeValue(void * structElement, FieldAux *aux, const unsigned int at
     if (type == STRUCT) {
     }
     printString(aux[i].alias);
-    get(type, structElement, *storage);
+//    get(type, structElement, *storage);
 
 };
- * */
+ 
+
 
 void printString(const void *s) {
     char *val = (char *) s;
