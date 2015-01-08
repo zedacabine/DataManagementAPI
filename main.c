@@ -17,7 +17,6 @@
 #define MEDIUM_STRING 80
 #define LONG_STRING 260 
 
-
 /*------------------------------------------------------------*/
 typedef struct {
     unsigned int id_categoria;
@@ -130,21 +129,27 @@ int main(int argc, char** argv) {
     CRUD.read.parsedRead = &parsedRead;
 
 
-    int x[] = {2,3,4};
+    int x[] = {2, 3, 4};
     int y[] = {PERGUNTA};
     /////////////////////////////////  
-
+    //parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
+    //fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
+    //parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
     //fullList(perguntas, sizeof (Pergunta), 2, estructAuxPerguntas, 5);
     ////////////////////////
-   
+    printf("%p \n", perguntas);
+    printf("%p \n", &perguntas[0]);
+    printf("%p \n", &perguntas[0] + sizeof (perguntas[0]));
+    printf("%p \n", &perguntas[0] + sizeof (perguntas[0]) + sizeof (perguntas[0]));
+    puts("");
+    printf("%p \n", perguntas);
+    printf("%p \n", &perguntas[0]);
+    printf("%p \n", &perguntas[0]);
+    printf("%p \n", &perguntas[0].id_pergunta+estructAuxPerguntas[0].sizeBytes);
+    puts("");
+    int * storage;
+    getAtributeValue(perguntas[0], 8, &storage);
 
-
-    
-    parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
-    //fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
-    parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
-
-    //       CRUD.list.parsedList();
 
     return (EXIT_SUCCESS);
 }
