@@ -1,15 +1,45 @@
 #include "DataManagement.h"
 #include <stdio.h>
+/*
+char getString(void *s, void *storage) {
+    char *val = (char *) s;
+    (char *)storage =*val;
+};
 
-void getAtributeValue(void * structElement, const unsigned int atributeNumber, void * storage) {
+int getInt(void *i, void *storage) {
+    int *val = (int *) i;
+    (int *)storage =*val;
+};
 
-    printf("%p \n", structElement);
-    printf("%p \n", &structElement + sizeof (structElement[0]));
-    printf("%p \n", &structElement + sizeof (structElement[0]) + sizeof (structElement[0]));
+float getFloat(void *f, void *storage) {
+    float *val = (float *) f;
+    (float *)storage =*val;
+};
 
+void get(DataType type, void reg, void *storage) {
+    if (type == STRING) {
+        getString(reg, storage);
+    } else if (type == INT) {
+        getInt(reg, storage);
+    } else if (type == FLOAT) {
+        getFloat(reg, storage);
+    }
+}
 
+void getAtributeValue(void * structElement, FieldAux *aux, const unsigned int atributeNumber, void * storage) {
+
+    unsigned i;
+    for (i = 0; i < atributeNumber; ++i) {
+        structElement = structElement + aux[i].sizeBytes;
+    }
+    DataType type = aux[i].type;
+    if (type == STRUCT) {
+    }
+    printString(aux[i].alias);
+    get(type, structElement, *storage);
 
 };
+ * */
 
 void printString(const void *s) {
     char *val = (char *) s;
@@ -117,7 +147,7 @@ void readChar(void * field) {
 }
 
 void read(DataType type, void * field, const unsigned int maxSize) {
-    if (type == STRING || type == UNSIGNED_INT) {
+    if (type == STRING) {
         readString(field, maxSize);
     } else if (type == INT) {
         readInt(field);
