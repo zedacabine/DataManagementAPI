@@ -30,7 +30,6 @@ void get(DataType type, void *reg, void *storage) {
     }
 }
 
-
 void getAtributeValue(void * structElement, FieldAux *aux, const unsigned int atributeNumber, void * storage) {
 
     unsigned i;
@@ -41,10 +40,10 @@ void getAtributeValue(void * structElement, FieldAux *aux, const unsigned int at
     if (type == STRUCT) {
     }
     printString(aux[i].alias);
-//    get(type, structElement, *storage);
+    get(type, structElement, storage);
 
 };
- 
+
 
 
 void printString(const void *s) {
@@ -74,9 +73,13 @@ void printFloat(const void * f) {
 }
 
 /*
- * @brief Imprime qualquer tipo de dados, recebe um tipo de dados e uma variável como parametro
+ * @brief Imprime qualquer tipo de dados, recebe um tipo de dados e o valor a imprimir como parametros
+ * @param type- tipo de dados do valor dado
+ * @param *val- endereço de memoria do valor
  * Exemplo:
  * @code
+ * int i = 1;
+ * print(INT,&i);
  * @endcode
  */
 void print(const DataType type, const void *const val) {
@@ -142,14 +145,17 @@ void readString(void * field, const unsigned int maxSize) {
 
 void readInt(void * field) {
     scanf("%d", field);
+    while (getchar() != '\n');
 };
 
 void readFloat(void * field) {
     scanf("%f", field);
+    while (getchar() != '\n');
 };
 
 void readChar(void * field) {
     scanf("%c", field);
+    while (getchar() != '\n');
 }
 
 void read(DataType type, void * field, const unsigned int maxSize) {
