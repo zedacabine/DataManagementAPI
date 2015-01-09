@@ -71,7 +71,7 @@ extern "C" {
     } Read;
 
     typedef struct {
-        void (*create)(void *, int *, FieldAux *, const unsigned int);
+        void (*create)(const unsigned short stuctTypeSize, void * list, int *contador, FieldAux *aux, const unsigned int fieldsNumber);
         Read read;
         void (*update)();
         void (*delete)();
