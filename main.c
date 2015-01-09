@@ -132,17 +132,26 @@ int main(int argc, char** argv) {
     int x[] = {2, 3, 4};
     int y[] = {PERGUNTA};
     /////////////////////////////////  TESTES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    //parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
-    //fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
-    //parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
-    //fullList(perguntas, sizeof (Pergunta), 2, estructAuxPerguntas, 5);
+
+    /* 
+    parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
+    fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
+    parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
+    
     int * storage;
-    getAtributeValue(perguntas[1], 1, &storage);
+    getAtributeValue(&perguntas[1],estructAuxPerguntas, 1, &storage);
+     * 
+    CRUD.create(sizeof(Pergunta),perguntas, &contador,estructAuxPerguntas,5);
+
+    fullList(perguntas, sizeof (Pergunta), 3, estructAuxPerguntas, 5);
+ 
+    printInt(&contador);
+     */
+
     ////////////////////////
 
-    
 
-    
+
     return (EXIT_SUCCESS);
 }
 
