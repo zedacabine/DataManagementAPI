@@ -30,6 +30,14 @@ void get(DataType type, void *reg, void *storage) {
     }
 }
 
+/**
+ * This method returns to a given pointer the value of a chosen atribute structure element;
+ * @param *structElement-Pointer to the element structure;
+ * @param *aux-Pointer to the aux structure;
+ * @param atributeNumber-Atribute number inside of the structure;
+ * @param *storage-Pointer to the variable where de atribute value is going to;
+ * 
+ */
 void getAtributeValue(void * structElement, FieldAux *aux, const unsigned int atributeNumber, void * storage) {
 
     unsigned i;
