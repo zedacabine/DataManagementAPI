@@ -38,21 +38,19 @@ void get(DataType type, void *reg, void *storage) {
  * @param *storage-Pointer to the variable where de atribute value is going to;
  * 
  */
-void getAtributeValue(void * structElement, FieldAux *aux, const unsigned int atributeNumber, void * storage) {
+void getAtributeValue(void * element, FieldAux *aux, const unsigned int atributeNumber, void * storage) {
 
     unsigned i;
     for (i = 0; i < atributeNumber; ++i) {
-        structElement = structElement + aux[i].sizeBytes;
+        element = element + aux[i].sizeBytes;
     }
     DataType type = aux[i].type;
     if (type == STRUCT) {
     }
     printString(aux[i].alias);
-    get(type, structElement, storage);
+    get(type, element, storage);
 
 };
-
-
 
 void printString(const void *s) {
     char *val = (char *) s;
@@ -219,3 +217,74 @@ void update() {
 
 void delete() {
 };
+
+elementMemoryAdress(void * list, const unsigned int stuctTypeSize, const unsigned int elementNumber, void *storage) {
+    storage = list + (stuctTypeSize * elementNumber);
+}
+
+int searchSigle();
+
+int search(const unsigned int field, void*searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int stuctTypeSize) {
+
+    unsigned int i = 0, j = 0, resultKeys[10];
+    void* reg;
+    int tmpStorage = NULL;
+    int toReturn = -1;
+    for (i = 0; i < elementsNumber; i++) {
+        reg = list + (stuctTypeSize * i);
+        //TODO implementar a função elementMemoryAdress
+        getAtributeValue(reg, aux, field, &tmpStorage);
+        if (tmpStorage == *((int *) searchValue)) toReturn = i;
+
+        return toReturn;
+
+
+    }
+
+
+};
+
+/*
+int ordenar(int inf, int sup){
+     int i, j;
+     Pergunta temp;
+
+     while(sup > inf)
+     {
+           i=inf;
+           j=sup;
+           temp = alunos[inf];
+
+           while(i < j){
+                 while(alunos[j].cod_alunos > temp.cod_alunos){
+                       j--;
+                 }
+                 alunos[i] = alunos[j];
+                 while(i < j && alunos[i].cod_alunos <= temp.cod_alunos){
+                       i++;
+                 }
+                 alunos[j] = alunos[i];
+           }
+           alunos[i] = temp;
+           ordenar(inf, i - 1);
+           inf = i + 1;
+     }
+}
+ */
+
+int PesquisaBinaria(int vet[], int chave, int Tam) {
+    int inf = 0; //Limite inferior      (o primeiro elemento do vetor em C é zero          )
+    int sup = Tam - 1; //Limite superior    (termina em um número a menos 0 à 9 são 10 numeros )
+    int meio;
+    while (inf <= sup) {
+        meio = (inf + sup) / 2;
+        if (chave == vet[meio])
+            return meio;
+        else if (chave < vet[meio])
+            sup = meio - 1;
+        else
+            inf = meio + 1;
+    }
+    return -1; // não encontrado
+}
+
