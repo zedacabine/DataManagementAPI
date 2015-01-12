@@ -149,8 +149,14 @@ int main(int argc, char** argv) {
      */
 
     ////////////////////////
-
-
+    int * i;
+    int teste;
+    i=1;
+    
+    teste=search(ID_PERGUNTA,&i,perguntas,estructAuxPerguntas,2,sizeof(Pergunta));
+  
+    printf("%d",teste);
+    
 
     return (EXIT_SUCCESS);
 }
