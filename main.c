@@ -98,7 +98,11 @@ typedef struct {
 
 int main(int argc, char** argv) {
 
+ 
+    
+   
 
+    
     int contador = 2;
 
 
@@ -146,17 +150,35 @@ int main(int argc, char** argv) {
     fullList(perguntas, sizeof (Pergunta), 3, estructAuxPerguntas, 5);
  
     printInt(&contador);
+     * 
+     *  int *p;
+   int i;
+   int *j;
+   j=1;
+
+   p = search(ID_CATEGORIA, &j, perguntas, estructAuxPerguntas, 2, sizeof (Pergunta));
+
+   for ( i = 0; i < 10; i++ )
+   {
+       printf( "%d \n",*(p + i));
+   }
      */
 
+   
+    char ola[10];
+    strcpy(ola,"ola");
+    char ole[10];
+    strcpy(ole,"ole");
+    
+    //printf("%d",strcmp(ola,ole));
     ////////////////////////
-    int * i;
-    int teste;
-    i=1;
-    
-    teste=search(ID_PERGUNTA,&i,perguntas,estructAuxPerguntas,2,sizeof(Pergunta));
-  
-    printf("%d",teste);
-    
+    printf("%d",compare(STRING,ola,STRING,ole));
+    //printf("%d",compare(STRING,ola,STRING,ole));
+
+   return 0;
+   
+
+
 
     return (EXIT_SUCCESS);
 }
