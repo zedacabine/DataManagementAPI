@@ -24,6 +24,8 @@ extern "C" {
 #define UNSIGNED_SHORT_SIZE sizeof(unsigned short)
 #define UNSIGNED_INT_SIZE sizeof(unsigned int)
 
+#define NO_VALUE -1
+    
     typedef enum {
         INT,
         SHORT,
