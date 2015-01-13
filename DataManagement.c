@@ -1,5 +1,16 @@
 #include "DataManagement.h"
 #include <stdio.h>
+#include <time.h>
+
+char * castSring(void *s) {
+    char *val = (char *) s;
+    return val;
+}
+
+int * castInt(void *i) {
+    int *val = (int *) i;
+    return val;
+}
 
 void getInt(void *i, void *storage) {
     int *val = (int *) i;
@@ -224,24 +235,50 @@ elementMemoryAdress(void * list, const unsigned int stuctTypeSize, const unsigne
 
 int searchSigle();
 
-int search(const unsigned int field, void*searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int stuctTypeSize) {
+int compareStrings(void *string_one, void *string_two) {
+    string_one = castSring(string_one);
+    string_two = castSring(string_two);
+    if (strcmp(string_one, string_two) == 0) return true;
+    else return false;
+}
 
-    unsigned int i = 0, j = 0, resultKeys[10];
-    void* reg;
-    int tmpStorage = NULL;
-    int toReturn = -1;
+int compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue) {
+    unsigned int toReturn = false;
+    if (varType == STRING && toCompareType == STRING) {
+        toReturn = compareStrings(varValue, toCompareValue);
+    }
+    else {
+        //if(varValue)
+    }
+    return toReturn;
+
+
+}
+
+int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int stuctTypeSize) {
+
+    unsigned int i = 0, j = 0, counter = 0;
+    void *reg;
+    int atributeValue = NULL;
+#define MAX_RESULTS 10
+
+    static int resultKeys[MAX_RESULTS];
+
     for (i = 0; i < elementsNumber; i++) {
         reg = list + (stuctTypeSize * i);
         //TODO implementar a função elementMemoryAdress
-        getAtributeValue(reg, aux, field, &tmpStorage);
-        if (tmpStorage == *((int *) searchValue)) toReturn = i;
-
-        return toReturn;
-
+        getAtributeValue(reg, aux, field, &atributeValue);
+        DataType type = aux[field].type;
+        if (atributeValue == *((int *) searchValue)) {
+            resultKeys[counter] = i;
+            counter++;
+        }
 
     }
-
-
+    for (j = counter; j < MAX_RESULTS; j++) {
+        resultKeys[j] = NO_VALUE;
+    }
+    return resultKeys;
 };
 
 /*
@@ -287,4 +324,7 @@ int PesquisaBinaria(int vet[], int chave, int Tam) {
     }
     return -1; // não encontrado
 }
+
+
+
 
