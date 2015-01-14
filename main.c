@@ -98,11 +98,11 @@ typedef struct {
 
 int main(int argc, char** argv) {
 
- 
-    
-   
 
-    
+
+
+
+
     int contador = 2;
 
 
@@ -151,32 +151,29 @@ int main(int argc, char** argv) {
  
     printInt(&contador);
      * 
-     *  int *p;
-   int i;
-   int *j;
-   j=1;
-
-   p = search(ID_CATEGORIA, &j, perguntas, estructAuxPerguntas, 2, sizeof (Pergunta));
-
-   for ( i = 0; i < 10; i++ )
-   {
-       printf( "%d \n",*(p + i));
-   }
+    
      */
 
-   
-    char ola[10];
-    strcpy(ola,"ola");
-    char ole[10];
-    strcpy(ole,"ole");
-    
-    //printf("%d",strcmp(ola,ole));
-    ////////////////////////
-    printf("%d",compare(STRING,ola,STRING,ole));
-    //printf("%d",compare(STRING,ola,STRING,ole));
 
-   return 0;
-   
+    int *p;
+    int i = 1;
+    int j = 1;
+
+    char ola[3];
+    char ole[3];
+    strcpy(ola, "ola");
+    strcpy(ole, "ola");
+
+
+
+    p = search(ID_CATEGORIA, &j, perguntas, estructAuxPerguntas, 2, sizeof (Pergunta),INT);
+
+     for (i = 0; i < 10; i++) {
+       printf("%d \n", *(p + i));
+   }
+
+    printf("%d", compare(STRING, ola, STRING, ole));
+    printf("%d", compare(INT, i, INT, j));
 
 
 
