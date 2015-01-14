@@ -2,14 +2,19 @@
 #include <stdio.h>
 #include <time.h>
 
-char * castSring(void *s) {
+char *castString(void *s) {
     char *val = (char *) s;
     return val;
 }
 
-int * castInt(void *i) {
+int castInt(void *i) {
     int *val = (int *) i;
-    return val;
+    return *val;
+}
+
+int castFloat(void *f) {
+    float *val = (float *) f;
+    return *val;
 }
 
 void getInt(void *i, void *storage) {
@@ -64,16 +69,14 @@ void getAtributeValue(void * element, FieldAux *aux, const unsigned int atribute
 };
 
 void printString(const void *s) {
-    char *val = (char *) s;
-    puts(val);
+    puts(castString(s));
 }
 
 /*
  * Imprime um inteiro
  */
-void printInt(const void *i) {
-    int *val = (int *) i;
-    printf("%d", *val);
+void printInt(const void * i) {
+    printf("%d", castInt(i));
     puts("");
 }
 
@@ -84,8 +87,7 @@ void printUnsignedInt(const void * ui) {
 }
 
 void printFloat(const void * f) {
-    float *val = (float *) f;
-    printf("%f", *val);
+    printf("%f", castFloat(f));
     puts("");
 }
 
@@ -134,28 +136,28 @@ void listRegistry(void * reg, FieldAux *aux, unsigned field) {
  * @param structTypeSize-Size of the struct
  * 
  */
-void fullList(void *list, const unsigned short stuctTypeSize, const unsigned int listSize, FieldAux *aux, const unsigned int fieldsNumber) {
+void fullList(void *list, const unsigned short structTypeSize, const unsigned int listSize, FieldAux *aux, const unsigned int fieldsNumber) {
     unsigned int i = 0, j = 0;
     for (i = 0; i < listSize; i++) {
         for (j = 0; j < fieldsNumber; j++) {
-            listRegistry(list + (stuctTypeSize * i), aux, j);
+            listRegistry(list + (structTypeSize * i), aux, j);
         }
         puts("---------------------------------------------");
     }
 }
 
-void parsedList(void *list, const unsigned short stuctTypeSize, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber) {
+void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber) {
     unsigned int i = 0, j = 0;
     for (i = 0; i < elementsNumber; i++) {
         for (j = 0; j < fieldsNumber; j++) {
-            listRegistry(list + (stuctTypeSize * elements[i]), aux, fields[j]);
+            listRegistry(list + (structTypeSize * elements[i]), aux, fields[j]);
         }
         puts("---------------------------------------------");
     }
 }
 
 void readString(void * field, const unsigned int maxSize) {
-    scanf("%[^\n]s", field);
+    scanf("%[^\n]s", castString(field));
     while (getchar() != '\n');
 
 };
@@ -197,28 +199,28 @@ void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) 
     puts("");
 }
 
-void parsedRead(RequestType rtype, const unsigned short stuctTypeSize, void *list, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber) {
+void parsedRead(RequestType rtype, const unsigned short structTypeSize, void *list, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber) {
 
     unsigned int i = 0, j = 0;
     for (i = 0; i < elementsNumber; i++) {
         for (j = 0; j < fieldsNumber; j++) {
-            readRegistry(rtype, list + (stuctTypeSize * elements[i]), aux, fields[j]);
+            readRegistry(rtype, list + (structTypeSize * elements[i]), aux, fields[j]);
         }
         puts("---------------------------------------------");
     }
 
 }
 
-void fullRead(RequestType rType, const unsigned short stuctTypeSize, void * list, const unsigned int element, FieldAux *aux, const unsigned int fieldsNumber) {
+void fullRead(RequestType rType, const unsigned short structTypeSize, void * list, const unsigned int element, FieldAux *aux, const unsigned int fieldsNumber) {
     unsigned int j = 0;
     for (j = 0; j < fieldsNumber; j++) {
-        readRegistry(rType, list + (stuctTypeSize * element), aux, j);
+        readRegistry(rType, list + (structTypeSize * element), aux, j);
     }
     puts("---------------------------------------------");
 }
 
-void create(const unsigned short stuctTypeSize, void * list, int *contador, FieldAux *aux, const unsigned int fieldsNumber) {
-    fullRead(CREATE, stuctTypeSize, list, (*contador), aux, fieldsNumber);
+void create(const unsigned short structTypeSize, void * list, int *contador, FieldAux *aux, const unsigned int fieldsNumber) {
+    fullRead(CREATE, structTypeSize, list, (*contador), aux, fieldsNumber);
     (*contador)++;
 
 }
@@ -229,51 +231,56 @@ void update() {
 void delete() {
 };
 
-elementMemoryAdress(void * list, const unsigned int stuctTypeSize, const unsigned int elementNumber, void *storage) {
-    storage = list + (stuctTypeSize * elementNumber);
+void elementMemoryAdress(void * list, const unsigned int structTypeSize, const unsigned int elementNumber, void *storage) {
+    storage = list + (structTypeSize * elementNumber);
 }
 
 int searchSigle();
 
 int compareStrings(void *string_one, void *string_two) {
-    string_one = castSring(string_one);
-    string_two = castSring(string_two);
+    string_one = castString(string_one);
+    string_two = castString(string_two);
     if (strcmp(string_one, string_two) == 0) return true;
     else return false;
 }
 
 int compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue) {
+    //printf("%d",varValue);
+      //  printf("%d",toCompareValue);
+
     unsigned int toReturn = false;
     if (varType == STRING && toCompareType == STRING) {
         toReturn = compareStrings(varValue, toCompareValue);
-    }
-    else {
-        //if(varValue)
+    } else {
+        if (varValue == toCompareValue) toReturn = true;
+        else toReturn = false;
     }
     return toReturn;
 
 
 }
 
-int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int stuctTypeSize) {
+int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType) {
 
     unsigned int i = 0, j = 0, counter = 0;
     void *reg;
     int atributeValue = NULL;
-#define MAX_RESULTS 10
+    #define MAX_RESULTS 10
 
     static int resultKeys[MAX_RESULTS];
 
     for (i = 0; i < elementsNumber; i++) {
-        reg = list + (stuctTypeSize * i);
+        reg = list + (structTypeSize * i);
         //TODO implementar a função elementMemoryAdress
         getAtributeValue(reg, aux, field, &atributeValue);
         DataType type = aux[field].type;
-        if (atributeValue == *((int *) searchValue)) {
+        //fazer cast para search value
+        //TODO cast interface
+        unsigned int result = compare(type, atributeValue, searchValueType, *((int *) searchValue));
+        if (result == true) { 
             resultKeys[counter] = i;
             counter++;
         }
-
     }
     for (j = counter; j < MAX_RESULTS; j++) {
         resultKeys[j] = NO_VALUE;
