@@ -25,7 +25,11 @@ extern "C" {
 #define UNSIGNED_INT_SIZE sizeof(unsigned int)
 
 #define NO_VALUE -1
-    
+
+#define SHORT_STRING 28
+#define MEDIUM_STRING 80
+#define LONG_STRING 260 
+
     typedef enum {
         INT,
         SHORT,
@@ -48,7 +52,7 @@ extern "C" {
 
     typedef struct {
         char fieldName[20];
-        char alias[25+1];
+        char alias[25 + 1];
         DataType type;
         bool required;
         bool unique;
@@ -79,33 +83,33 @@ extern "C" {
         void (*delete)();
         List list;
     } crud;
-    
+
     //Print interface
     void printString(const void *s);
     void printInt(const void *i);
     void printUnsignedInt(const void * ui);
     void printFloat(const void * f);
     void print(const DataType type, const void *const val);
-    
+
     //List interface
     void listRegistry(void * reg, FieldAux *aux, unsigned field);
     void fullList(void *list, const unsigned short stuctTypeSize, const unsigned int listSize, FieldAux *aux, const unsigned int fieldsNumber);
     void parsedList(void *list, const unsigned short stuctTypeSize, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber);
-    
+
     //Create interface
     void create(const unsigned short stuctTypeSize, void * list, int *contador, FieldAux *aux, const unsigned int fieldsNumber);
-    
+
     //Read interface
     //void read();
     void parsedRead(RequestType rtype, const unsigned short stuctTypeSize, void *list, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber);
     void fullRead(RequestType rType, const unsigned short stuctTypeSize, void * list, const unsigned int element, FieldAux *aux, const unsigned int fieldsNumber);
-    
+
     //Update interface
     void update();
-    
+
     //Delete interface
     void delete();
-    
+
 
 
 

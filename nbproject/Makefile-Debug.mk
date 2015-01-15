@@ -35,8 +35,19 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Ajudas.o \
+	${OBJECTDIR}/Categoria.o \
 	${OBJECTDIR}/DataManagement.o \
 	${OBJECTDIR}/Genero.o \
+	${OBJECTDIR}/Jogadas.o \
+	${OBJECTDIR}/Jogo.o \
+	${OBJECTDIR}/Menu.o \
+	${OBJECTDIR}/Pergunta.o \
+	${OBJECTDIR}/Resposta.o \
+	${OBJECTDIR}/TipoResposta.o \
+	${OBJECTDIR}/TipoUtilizador.o \
+	${OBJECTDIR}/Utilizador.o \
+	${OBJECTDIR}/files.o \
 	${OBJECTDIR}/main.o
 
 
@@ -64,6 +75,16 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/datamanagementapi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/datamanagementapi ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/Ajudas.o: Ajudas.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ajudas.o Ajudas.c
+
+${OBJECTDIR}/Categoria.o: Categoria.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Categoria.o Categoria.c
+
 ${OBJECTDIR}/DataManagement.o: DataManagement.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -73,6 +94,51 @@ ${OBJECTDIR}/Genero.o: Genero.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Genero.o Genero.c
+
+${OBJECTDIR}/Jogadas.o: Jogadas.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Jogadas.o Jogadas.c
+
+${OBJECTDIR}/Jogo.o: Jogo.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Jogo.o Jogo.c
+
+${OBJECTDIR}/Menu.o: Menu.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Menu.o Menu.c
+
+${OBJECTDIR}/Pergunta.o: Pergunta.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pergunta.o Pergunta.c
+
+${OBJECTDIR}/Resposta.o: Resposta.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Resposta.o Resposta.c
+
+${OBJECTDIR}/TipoResposta.o: TipoResposta.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TipoResposta.o TipoResposta.c
+
+${OBJECTDIR}/TipoUtilizador.o: TipoUtilizador.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TipoUtilizador.o TipoUtilizador.c
+
+${OBJECTDIR}/Utilizador.o: Utilizador.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Utilizador.o Utilizador.c
+
+${OBJECTDIR}/files.o: files.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/files.o files.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

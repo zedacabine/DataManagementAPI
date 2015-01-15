@@ -22,11 +22,11 @@ extern "C" {
         FEMININO,
         MASCULINO
     } Genero;
-    
+
     //Aqui so pode estar o prototipo
-    void readGenero(Genero *const genero);
+    void readGenero(Genero * const genero);
     void escreverGenero(Genero const genero);
-    void converterGeneroEmTexto(const Genero genero);    
+    void converterGeneroEmTexto(const Genero genero);
 
 #ifdef	__cplusplus
 }

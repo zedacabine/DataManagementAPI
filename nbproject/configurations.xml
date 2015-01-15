@@ -2,8 +2,19 @@
 <configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="f1" displayName="Header FIles" projectFiles="true">
+      <itemPath>Ajudas.h</itemPath>
+      <itemPath>Categoria.h</itemPath>
       <itemPath>DataManagement.h</itemPath>
+      <itemPath>Dificuldade.h</itemPath>
       <itemPath>Genero.h</itemPath>
+      <itemPath>Jogadas.h</itemPath>
+      <itemPath>Jogo.h</itemPath>
+      <itemPath>Menu.h</itemPath>
+      <itemPath>Pergunta.h</itemPath>
+      <itemPath>Resposta.h</itemPath>
+      <itemPath>TipoResposta.h</itemPath>
+      <itemPath>TipoUtilizador.h</itemPath>
+      <itemPath>Utilizador.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,8 +23,19 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Ajudas.c</itemPath>
+      <itemPath>Categoria.c</itemPath>
       <itemPath>DataManagement.c</itemPath>
       <itemPath>Genero.c</itemPath>
+      <itemPath>Jogadas.c</itemPath>
+      <itemPath>Jogo.c</itemPath>
+      <itemPath>Menu.c</itemPath>
+      <itemPath>Pergunta.c</itemPath>
+      <itemPath>Resposta.c</itemPath>
+      <itemPath>TipoResposta.c</itemPath>
+      <itemPath>TipoUtilizador.c</itemPath>
+      <itemPath>Utilizador.c</itemPath>
+      <itemPath>files.c</itemPath>
       <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -38,13 +60,57 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Ajudas.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Ajudas.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Categoria.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Categoria.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="DataManagement.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="DataManagement.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Dificuldade.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Genero.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Genero.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Jogadas.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Jogadas.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Jogo.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Jogo.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Menu.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pergunta.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Pergunta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Resposta.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Resposta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TipoResposta.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="TipoResposta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TipoUtilizador.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="TipoUtilizador.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Utilizador.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Utilizador.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="files.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -69,13 +135,57 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Ajudas.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Ajudas.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Categoria.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Categoria.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="DataManagement.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="DataManagement.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Dificuldade.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Genero.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Genero.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Jogadas.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Jogadas.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Jogo.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Jogo.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Menu.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pergunta.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Pergunta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Resposta.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Resposta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TipoResposta.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="TipoResposta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TipoUtilizador.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="TipoUtilizador.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Utilizador.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Utilizador.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="files.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>

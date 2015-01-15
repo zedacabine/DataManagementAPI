@@ -9,101 +9,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "DataManagement.h"
-
-/*
- * 
- */
-#define SHORT_STRING 28
-#define MEDIUM_STRING 80
-#define LONG_STRING 260 
-
-/*------------------------------------------------------------*/
-typedef struct {
-    unsigned int id_categoria;
-    char categoria[SHORT_STRING];
-    unsigned int pontuacao_categoria;
-
-} Categoria;
-
-typedef struct {
-    unsigned int id_pergunta;
-    unsigned int id_categoria;
-    unsigned int id_dificuldade;
-    unsigned int id_resposta_certa;
-    char pergunta[LONG_STRING];
-} Pergunta;
-
-enum CamposPergunta {
-    ID_PERGUNTA,
-    ID_CATEGORIA,
-    ID_DIFICULDADE,
-    ID_RESPOSTA_CERTA,
-    PERGUNTA
-};
-
-typedef struct {
-    unsigned int id_resposta;
-    unsigned int id_pergunta;
-    char resposta[LONG_STRING];
-} Resposta;
-
-typedef struct {
-    unsigned int id_jogo;
-    unsigned int id_utilizador;
-} Jogo;
-
-typedef struct {
-    unsigned int id_jogada;
-    unsigned int id_utilizador;
-    unsigned int id_jogo;
-    unsigned int tempo;
-    unsigned int id_pergunta;
-    unsigned int id_resposta;
-    unsigned int pontuacao;
-} Jogadas;
-
-/*---------------------------------------------------------------------*/
-typedef struct {
-    unsigned int id_tipo_resposta;
-    char tipo_resposta[SHORT_STRING];
-    unsigned int id_resposta;
-} TipoResposta;
-
-/*---------------------------------------------------------------------*/
-typedef struct {
-    unsigned int id_utilizador;
-    unsigned int id_tipo_utilizador;
-    char nome[MEDIUM_STRING];
-    char password[SHORT_STRING];
-} Utilizador;
-
-typedef struct {
-    unsigned int id_utilizador;
-    char tipo_utilizador;
-} TipoUtilizador;
-
-typedef struct {
-    unsigned int id_ajuda;
-    char ajuda[MEDIUM_STRING];
-} Ajudas;
-
-typedef struct {
-    unsigned int id_dificuldade;
-    char dificuldade[SHORT_STRING];
-    unsigned int pontuacao;
-} Dificuldade;
-
-/*------------------------------------------------------------*/
-
+#include "Menu.h"
+#include "Pergunta.h"
 
 int main(int argc, char** argv) {
 
- 
-    
-   
-
-    
-    int contador = 2;
+    //menu();
 
 
     FieldAux estructAuxPerguntas[] = {
@@ -115,12 +26,20 @@ int main(int argc, char** argv) {
 
     };
 
-    Pergunta perguntas[5] = {
-        {.id_pergunta = 1, .id_categoria = 1, .id_dificuldade = 1, .id_resposta_certa = 1, .pergunta = "Qual é o resultado de 1+1?"},
-        {.id_pergunta = 2, .id_categoria = 1, .id_dificuldade = 1, .id_resposta_certa = 1, .pergunta = "Como se chama a musa do Fabão?"}
-    };
+    Pergunta perguntas[5];
+    int contador = 2;
 
-    ////////////////////////
+
+    const unsigned int tamAuxPergunta = (sizeof (estructAuxPerguntas) / sizeof (estructAuxPerguntas[0]));
+    printf("%d", tamAuxPergunta);
+    const unsigned int tamPerguntas = sizeof (Pergunta);
+
+
+    //create(tamPerguntas, perguntas, &contador, estructAuxPerguntas, tamAuxPergunta);
+
+    //inserirPergunta(tamPerguntas, perguntas, &contador, estructAuxPerguntas, tamAuxPergunta);
+    // fullList(perguntas, sizeof (Pergunta), 2, estructAuxPerguntas, tamAuxPergunta);
+
 
 
     crud CRUD;
@@ -135,18 +54,60 @@ int main(int argc, char** argv) {
 
     int x[] = {2, 3, 4};
     int y[] = {PERGUNTA};
-    /////////////////////////////////  TESTES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    ////////////////                 Ficheiros                      \\\\\\\\\\\\\\
 
+    char nome[20];
+    strcpy(nome, "perguntas.txt");
+    //writeFile(nome, perguntas, contador);
+
+
+
+    FILE *ap_ficheiro;
+
+    Pergunta pergunta[tamAuxPergunta];
+    
+    ap_ficheiro = fopen(nome, "r+"); // Abre o ficheiro
+    if (!ap_ficheiro){ // Se o apontador devolvido for inválido ocorreu um erro na leitura
+        printf("\n IMPOSSIVEL ABRIR O FICHEIRO.");
+        printf("\n\n ");
+    } else {
+        contador = fread(perguntas, sizeof (Pergunta), tamAuxPergunta, ap_ficheiro); // Lê a informação do ficheiro e armazena no array
+        fclose(ap_ficheiro); // Fecha o ficheiro
+        printf("\n O FICHEIRO FOI LIDO COM SUCESSO.\n\n ");
+    }
+
+
+
+    CRUD.list.fullList(perguntas, sizeof (Pergunta), contador, estructAuxPerguntas, tamAuxPergunta);
+    create(sizeof (Pergunta), perguntas, &contador, estructAuxPerguntas, tamAuxPergunta);
+
+    ap_ficheiro = fopen(nome, "a+"); // Abre o ficheiro  em modo de escrita
+    if (!ap_ficheiro) {
+        printf("\n IMPOSSIVEL ABRIR O FICHEIRO."); // Se o apontador devolvido for inválido ocorreu um erro na leitura
+        printf("\n\n ");
+    } else {
+        fwrite(perguntas, sizeof (Pergunta), contador, ap_ficheiro); // Guarda a informação do array no ficheiro 
+        fclose(ap_ficheiro); // Fecha o ficheiro
+        printf("\n O FICHEIRO FOI GUARDADO COM SUCESSO.\n\n ");
+    }
+
+    
+
+    return 0;
+    
+    return (EXIT_SUCCESS);
+}
+
+  /////////////////////////////////  TESTES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //CRUD.list.fullList(perguntas, sizeof (Pergunta), contador, estructAuxPerguntas, tamAuxPergunta);
+    
     /* 
     parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
     fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
     parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
-    
     int * storage;
     getAtributeValue(&perguntas[1],estructAuxPerguntas, 1, &storage);
-     * 
-    CRUD.create(sizeof(Pergunta),perguntas, &contador,estructAuxPerguntas,5);
-
+    create(sizeof(Pergunta), perguntas, &contador, estructAuxPerguntas, 5)
     fullList(perguntas, sizeof (Pergunta), 3, estructAuxPerguntas, 5);
  
     printInt(&contador);
@@ -155,32 +116,9 @@ int main(int argc, char** argv) {
    int i;
    int *j;
    j=1;
-
    p = search(ID_CATEGORIA, &j, perguntas, estructAuxPerguntas, 2, sizeof (Pergunta));
 
-   for ( i = 0; i < 10; i++ )
-   {
+   for ( i = 0; i < 10; i++ ){
        printf( "%d \n",*(p + i));
    }
      */
-
-   
-    char ola[10];
-    strcpy(ola,"ola");
-    char ole[10];
-    strcpy(ole,"ole");
-    
-    //printf("%d",strcmp(ola,ole));
-    ////////////////////////
-    printf("%d",compare(STRING,ola,STRING,ole));
-    //printf("%d",compare(STRING,ola,STRING,ole));
-
-   return 0;
-   
-
-
-
-    return (EXIT_SUCCESS);
-}
-
-

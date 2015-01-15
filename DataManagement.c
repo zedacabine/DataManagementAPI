@@ -246,8 +246,7 @@ int compare(DataType varType, void* varValue, DataType toCompareType, void * toC
     unsigned int toReturn = false;
     if (varType == STRING && toCompareType == STRING) {
         toReturn = compareStrings(varValue, toCompareValue);
-    }
-    else {
+    } else {
         //if(varValue)
     }
     return toReturn;
