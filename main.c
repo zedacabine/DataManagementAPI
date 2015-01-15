@@ -95,15 +95,16 @@ typedef struct {
 
 /*------------------------------------------------------------*/
 
-void listarPergunta(){
-    
+void listarPergunta() {
+
 }
 
 int main(int argc, char** argv) {
 
     int contador = 2;
 
-
+    
+    
     FieldAux estructAuxPerguntas[] = {
         {.fieldName = "id_pergunta", .alias = "Numero Pergunta", .sizeBytes = INT_SIZE, .type = INT, .unique = true, .required = true, .autoIncrement = true, .step = 1},
         {.fieldName = "id_categoria", .alias = "Numero Categoria", .sizeBytes = INT_SIZE, .type = INT, .required = true},
@@ -116,6 +117,10 @@ int main(int argc, char** argv) {
     Pergunta perguntas[5] = {
         {.id_pergunta = 1, .id_categoria = 1, .id_dificuldade = 1, .id_resposta_certa = 1, .pergunta = "Qual é o resultado de 1+1?"},
         {.id_pergunta = 2, .id_categoria = 1, .id_dificuldade = 1, .id_resposta_certa = 1, .pergunta = "Como se chama a musa do Fabão?"}
+    };
+    
+    Class ola={
+        {.name="Pergunta",.StructTypeSize=sizeof(Pergunta),.data=perguntas,.auxStruct=estructAuxPerguntas}
     };
 
     ////////////////////////
@@ -131,7 +136,7 @@ int main(int argc, char** argv) {
     CRUD.read.parsedRead = &parsedRead;
 
 
-    
+
 
     return (EXIT_SUCCESS);
 }
