@@ -8,13 +8,11 @@ char *castString(void *s) {
 }
 
 int castInt(void *i) {
-    int *val = (int *) i;
-    return *val;
+    return *(int*) i;
 }
 
 int castFloat(void *f) {
-    float *val = (float *) f;
-    return *val;
+    return *(float*) f;
 }
 
 void getInt(void *i, void *storage) {
@@ -63,7 +61,6 @@ void getAtributeValue(void * element, FieldAux *aux, const unsigned int atribute
     DataType type = aux[i].type;
     if (type == STRUCT) {
     }
-    printString(aux[i].alias);
     get(type, element, storage);
 
 };
@@ -244,31 +241,43 @@ int compareStrings(void *string_one, void *string_two) {
     else return false;
 }
 
-int compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue) {
-    //printf("%d",varValue);
-      //  printf("%d",toCompareValue);
+bool generalCompare(DataType type_one, void *value_one, DataType type_two, void *value_two) {
+    //TODO nao esta a fazer cast
+    if (type_one == INT) {
+        *(int*) value_one = castInt(value_one);
+        //printf("%d", value_one);
+    } else if (type_one == FLOAT) {
+        *(float*) value_one = castFloat(&value_one);
+    }
+    if (type_two == INT) {
+        *(int*) value_two = castInt(value_two);
+    } else if (type_two == FLOAT) {
+        *(float*) value_two = castFloat(value_two);
+    }
 
+    //TODO nao fazer cast aqui
+    if (*(int*) value_one == *(int*) value_two) return true;
+    else return false;
+
+}
+
+bool compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue) {
     unsigned int toReturn = false;
     if (varType == STRING && toCompareType == STRING) {
         toReturn = compareStrings(varValue, toCompareValue);
     } else {
-        if (varValue == toCompareValue) toReturn = true;
+        if (generalCompare(varType,varValue, toCompareType, toCompareValue) == true) toReturn = true;
         else toReturn = false;
     }
     return toReturn;
-
-
 }
 
 int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType) {
-
+    #define MAX_RESULTS 10
     unsigned int i = 0, j = 0, counter = 0;
     void *reg;
     int atributeValue = NULL;
-    #define MAX_RESULTS 10
-
     static int resultKeys[MAX_RESULTS];
-
     for (i = 0; i < elementsNumber; i++) {
         reg = list + (structTypeSize * i);
         //TODO implementar a função elementMemoryAdress
@@ -276,8 +285,8 @@ int * search(const unsigned int field, void *searchValue, void * list, FieldAux 
         DataType type = aux[field].type;
         //fazer cast para search value
         //TODO cast interface
-        unsigned int result = compare(type, atributeValue, searchValueType, *((int *) searchValue));
-        if (result == true) { 
+        unsigned int result = compare(type, &atributeValue, searchValueType, &searchValue);
+        if (result == true) {
             resultKeys[counter] = i;
             counter++;
         }

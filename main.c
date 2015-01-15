@@ -95,13 +95,11 @@ typedef struct {
 
 /*------------------------------------------------------------*/
 
+void listarPergunta(){
+    
+}
 
 int main(int argc, char** argv) {
-
-
-
-
-
 
     int contador = 2;
 
@@ -133,49 +131,7 @@ int main(int argc, char** argv) {
     CRUD.read.parsedRead = &parsedRead;
 
 
-    int x[] = {2, 3, 4};
-    int y[] = {PERGUNTA};
-    /////////////////////////////////  TESTES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-    /* 
-    parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
-    fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
-    parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
     
-    int * storage;
-    getAtributeValue(&perguntas[1],estructAuxPerguntas, 1, &storage);
-     * 
-    CRUD.create(sizeof(Pergunta),perguntas, &contador,estructAuxPerguntas,5);
-
-    fullList(perguntas, sizeof (Pergunta), 3, estructAuxPerguntas, 5);
- 
-    printInt(&contador);
-     * 
-    
-     */
-
-
-    int *p;
-    int i = 1;
-    int j = 1;
-
-    char ola[3];
-    char ole[3];
-    strcpy(ola, "ola");
-    strcpy(ole, "ola");
-
-
-
-    p = search(ID_CATEGORIA, &j, perguntas, estructAuxPerguntas, 2, sizeof (Pergunta),INT);
-
-     for (i = 0; i < 10; i++) {
-       printf("%d \n", *(p + i));
-   }
-
-    printf("%d", compare(STRING, ola, STRING, ole));
-    printf("%d", compare(INT, i, INT, j));
-
-
 
     return (EXIT_SUCCESS);
 }
