@@ -58,6 +58,8 @@ extern "C" {
         unsigned int maxSize;
         void *substruct;
     } FieldAux;
+    
+    
 
     typedef struct {
         void (*listRegistry)(void *, FieldAux *, unsigned);
