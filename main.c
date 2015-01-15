@@ -16,7 +16,8 @@ int main(int argc, char** argv) {
 
     //menu();
 
-
+    
+    
     FieldAux estructAuxPerguntas[] = {
         {.fieldName = "id_pergunta", .alias = "Numero Pergunta", .sizeBytes = INT_SIZE, .type = INT, .unique = true, .required = true, .autoIncrement = true, .step = 1},
         {.fieldName = "id_categoria", .alias = "Numero Categoria", .sizeBytes = INT_SIZE, .type = INT, .required = true},
@@ -122,3 +123,4 @@ int main(int argc, char** argv) {
        printf( "%d \n",*(p + i));
    }
      */
+

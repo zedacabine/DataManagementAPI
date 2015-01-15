@@ -49,7 +49,14 @@ extern "C" {
         LIST,
         DELETE
     } RequestType;
-
+    
+    typedef struct {
+        char name[20];
+        void *data;
+        unsigned int StructTypeSize;
+        void *auxStruct;
+    }Class;
+    
     typedef struct {
         char fieldName[20];
         char alias[25 + 1];
@@ -62,6 +69,8 @@ extern "C" {
         unsigned int maxSize;
         void *substruct;
     } FieldAux;
+    
+    
 
     typedef struct {
         void (*listRegistry)(void *, FieldAux *, unsigned);
