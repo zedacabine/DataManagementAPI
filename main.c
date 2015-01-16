@@ -1,3 +1,10 @@
+/* 
+ * File:   main.c
+ * Author: ivo
+ *
+ * Created on 16 de Outubro de 2014, 10:32
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -164,60 +171,39 @@ int main(int argc, char** argv) {
     CRUD.read.parsedRead = &parsedRead;
 
 
+    int x[] = {1, 2, 3};
+    int y[] = {PERGUNTA};
+
+    Class perguntaClass = {.name = "Pergunta", .StructTypeSize = sizeof (Pergunta), .data = perguntas, .auxStruct = estructAuxPerguntas, .elements = &contador, .fieldsNumber = (sizeof (estructAuxPerguntas) / sizeof (estructAuxPerguntas[0]))};
+
+
+    inserirPergunta(perguntaClass);
+    listarTodasPerguntas(perguntaClass);
+    filtrarPerguntas(perguntaClass, x, 3, y, 1);
+    ////////////////                 Ficheiros                      \\\\\\\\\\\\\\
     
 
 
     return 0;
 
+
+
+    // listarPergunta();
+
+    //parsedList(perguntaClass.data, perguntaClass.StructTypeSize, perguntaClass.auxStruct, x, 3, y,);
+    //parsedList(perguntaClass.data, perguntaClass.StructTypeSize,perguntaClass.auxStruct, x, 3, y, 1);
+
+
+
+
+
+
+
+
+
+
     return (EXIT_SUCCESS);
 }
 
-/////////////////////////////////  TESTES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
- //CRUD.list.fullList(perguntas, sizeof (Pergunta), contador, estructAuxPerguntas, tamAuxPergunta);
-
-/* 
-parsedRead(CREATE,sizeof (Pergunta),perguntas,estructAuxPerguntas, x, 3, y, 1);
-fullRead(CREATE, sizeof (Pergunta), perguntas,contador, estructAuxPerguntas, 5);
-parsedList(perguntas, sizeof (Pergunta), estructAuxPerguntas, x, 3, y, 1);
-int * storage;
-getAtributeValue(&perguntas[1],estructAuxPerguntas, 1, &storage);
-create(sizeof(Pergunta), perguntas, &contador, estructAuxPerguntas, 5)
-fullList(perguntas, sizeof (Pergunta), 3, estructAuxPerguntas, 5);
- 
-printInt(&contador);
- * 
- *  int *p;
-int i;
-int *j;
-j=1;
-p = search(ID_CATEGORIA, &j, perguntas, estructAuxPerguntas, 2, sizeof (Pergunta));
-
-for ( i = 0; i < 10; i++ ){
-   printf( "%d \n",*(p + i));
-}
- */
-
-   ////////////////                 Ficheiros                      \\\\\\\\\\\\\\
-   
-    /* char nome[20];
-        strcpy(nome, "perguntas.txt");
-    
-        readFile(nome, tamArrayPerguntas, perguntas, &contador);
-    
-    
-        CRUD.list.fullList(perguntas, sizeof (Pergunta), contador, estructAuxPerguntas, tamAuxPergunta);
-        printf("%d", contador);
-        create(sizeof (Pergunta), perguntas, &contador, estructAuxPerguntas, tamAuxPergunta);
-    
-        writeFile(nome, perguntas, contador);*/
 
 
-// int x[] = {2, 3, 4};
-    // int y[] = {PERGUNTA};
-
-    //create(taTipoPerooguntas, perguntas, &contador, estructAuxPerguntas, tamAuxPergunta);
-
-    //inserirPergunta(tamTipoPerguntas, perguntas, &contador, estructAuxPerguntas, tamAuxPergunta);
-    // fullList(perguntas, sizeof (Pergunta), 2, estructAuxPerguntas, tamAuxPergunta);
-
- 
