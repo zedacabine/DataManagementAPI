@@ -28,7 +28,11 @@ extern "C" {
         ID_RESPOSTA_CERTA,
         PERGUNTA
     };
-
+    
+    void inserirPergunta(Class perguntaClasse);
+    
+    
+    
 
     
 
