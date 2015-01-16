@@ -22,7 +22,7 @@ extern "C" {
 
     enum CamposUtilizador {
         ID_UTILIZADOR,
-        ID_TIPO_UTILIZADOR,
+        ID_TIPO_UTILIZADOR_UTILIZADOR,
         NOME,
         PASSWORD
     };

@@ -23,16 +23,12 @@ extern "C" {
 
     enum CamposPergunta {
         ID_PERGUNTA,
-        ID_CATEGORIA,
-        ID_DIFICULDADE,
-        ID_RESPOSTA_CERTA,
+        ID_CATEGORIA_PERGUNTAS,
+        ID_DIFICULDADE_PERGUNTAS,
+        ID_RESPOSTA_CERTA_PERGUNTAS,
         PERGUNTA
     };
-    
-    void inserirPergunta(Class perguntaClasse);
-    
-    
-    
+
 
     
 

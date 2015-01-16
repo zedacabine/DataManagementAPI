@@ -23,7 +23,8 @@ extern "C" {
 #define SHORT_SIZE sizeof(short)
 #define UNSIGNED_SHORT_SIZE sizeof(unsigned short)
 #define UNSIGNED_INT_SIZE sizeof(unsigned int)
-
+#define BOOL_SIZE sizeof(bool)
+    
 #define NO_VALUE -1
 
 #define SHORT_STRING 28
@@ -40,7 +41,8 @@ extern "C" {
         FLOAT,
         UNSIGNED_SHORT,
         UNSIGNED_INT,
-        STRUCT
+        STRUCT,
+        BOOL
     } DataType;
 
     typedef enum {
@@ -49,16 +51,14 @@ extern "C" {
         LIST,
         DELETE
     } RequestType;
-
+    
     typedef struct {
         char name[20];
         void *data;
         unsigned int StructTypeSize;
         void *auxStruct;
-        unsigned int *elements;
-        unsigned int fieldsNumber;
-    } Class;
-
+    }Class;
+    
     typedef struct {
         char fieldName[20];
         char alias[25 + 1];
@@ -71,6 +71,8 @@ extern "C" {
         unsigned int maxSize;
         void *substruct;
     } FieldAux;
+    
+    
 
     typedef struct {
         void (*listRegistry)(void *, FieldAux *, unsigned);

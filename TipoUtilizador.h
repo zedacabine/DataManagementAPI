@@ -19,7 +19,7 @@ extern "C" {
     } TipoUtilizador;
 
     enum CamposTipoUtilizador {
-        ID_UTILIZADOR,
+        ID_TIPO_UTILIZADOR,
         TIPO_UTILIZADOR
     };
 

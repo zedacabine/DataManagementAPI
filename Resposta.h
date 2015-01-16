@@ -21,7 +21,7 @@ extern "C" {
 
     enum CamposResposta {
         ID_RESPOSTA,
-        ID_PERGUNTA,
+        ID_PERGUNTA_RESPOSTA,
         RESPOSTA
     };
 

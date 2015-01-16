@@ -21,15 +21,15 @@ extern "C" {
         unsigned int id_pergunta;
         unsigned int id_resposta;
         unsigned int pontuacao;
-    } Jogadas;
+    } Jogada;
 
     enum CamposJogadas {
         ID_JOGADA,
-        ID_UTILIZADOR,
-        ID_JOGO,
+        ID_UTILIZADOR_JOGADAS,
+        ID_JOGO_JOGADAS,
         TEMPO,
-        ID_PERGUNTA,
-        ID_RESPOSTA,
+        ID_PERGUNTA_JOGADAS,
+        ID_RESPOSTA_JOGADAS,
         PONTUACAO
     };
 

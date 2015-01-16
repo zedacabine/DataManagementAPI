@@ -16,13 +16,13 @@ extern "C" {
     typedef struct {
         unsigned int id_dificuldade;
         char dificuldade[SHORT_STRING];
-        unsigned int pontuacao;
+        unsigned int pontuacao_dificuldade;
     } Dificuldade;
 
     enum CamposDificuldade {
         ID_DIFICULDADE,
         DIFICULDADE,
-        PONTUACAO
+        PONTUACAO_DIFICULDADE
     };
 
 

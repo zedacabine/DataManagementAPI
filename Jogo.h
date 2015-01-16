@@ -20,7 +20,7 @@ extern "C" {
 
     enum CamposJogo {
         ID_JOGO,
-        ID_UTILIZADOR
+        ID_UTILIZADOR_JOGO
     };
 
 

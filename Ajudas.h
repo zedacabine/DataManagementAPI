@@ -15,8 +15,8 @@ extern "C" {
 
     typedef struct {
         unsigned int id_ajuda;
-        char ajuda[MEDIUM_STRING];
-    } Ajudas;
+        char ajudas[MEDIUM_STRING];
+    } Ajuda;
 
     enum CamposAjudas {
         ID_AJUDA,
