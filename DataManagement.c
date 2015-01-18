@@ -11,6 +11,7 @@ char *castString(void *s) {
     char *val = (char *) s;
     return val;
 }
+
 /**
  * 
  * @param i
@@ -19,6 +20,7 @@ char *castString(void *s) {
 int castInt(void *i) {
     return *(int*) i;
 }
+
 /**
  * 
  * @param f
@@ -39,6 +41,7 @@ void getInt(void *i, void *storage) {
     *s = *val;
 
 };
+
 /**
  * 
  * @param s
@@ -49,6 +52,7 @@ void getString(void *s, void *storage) {
     char *st = (char*) storage;
     *st = *val;
 };
+
 /**
  * 
  * @param f
@@ -59,6 +63,7 @@ void getFloat(void *f, void *storage) {
     float *s = (float*) storage;
     *s = *val;
 };
+
 /**
  * 
  * @param type
@@ -95,6 +100,7 @@ void getAtributeValue(void * element, FieldAux *aux, const unsigned int atribute
     get(type, element, storage);
 
 };
+
 /**
  * 
  * @param s
@@ -111,6 +117,7 @@ void printInt(const void * i) {
     printf("%d", castInt(i));
     puts("");
 }
+
 /**
  * 
  * @param ui
@@ -120,6 +127,7 @@ void printUnsignedInt(const void * ui) {
     printf("%ui", *val);
     puts("");
 }
+
 /**
  * 
  * @param f
@@ -151,6 +159,7 @@ void print(const DataType type, const void *const val) {
         printFloat(val);
     }
 }
+
 /**
  * 
  * @param reg
@@ -185,6 +194,7 @@ void fullList(void *list, const unsigned short structTypeSize, const unsigned in
         puts("---------------------------------------------");
     }
 }
+
 /**
  * 
  * @param list
@@ -204,6 +214,36 @@ void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, 
         puts("---------------------------------------------");
     }
 }
+
+/**
+ * 
+ * @param perguntaClass
+ * @param key
+ */
+void singleList(Class class, const unsigned int key) {
+
+    int keys[] = {key};
+    int fields[class.fieldsNumber];
+    unsigned int i;
+    for (i = 0; i < class.fieldsNumber; i++) {
+        fields[i] = i;
+    }
+    parsedList(class.data, class.StructTypeSize, class.auxStruct, keys, 1, fields, class.fieldsNumber);
+}
+
+/**
+ * 
+ * @param class
+ * @param key
+ * @param fields
+ * @param fieldsNumber
+ */
+void singleParsedList(Class class, const unsigned int key, int *fields, unsigned fieldsNumber) {
+
+    int keys[] = {key};
+    parsedList(class.data, class.StructTypeSize, class.auxStruct, keys, 1, fields, fieldsNumber);
+}
+
 /**
  * 
  * @param field
@@ -214,6 +254,7 @@ void readString(void * field, const unsigned int maxSize) {
     while (getchar() != '\n');
 
 };
+
 /**
  * 
  * @param field
@@ -222,6 +263,7 @@ void readInt(void * field) {
     scanf("%d", field);
     while (getchar() != '\n');
 };
+
 /**
  * 
  * @param field
@@ -230,6 +272,7 @@ void readFloat(void * field) {
     scanf("%f", field);
     while (getchar() != '\n');
 };
+
 /**
  * 
  * @param field
@@ -238,6 +281,7 @@ void readChar(void * field) {
     scanf("%c", field);
     while (getchar() != '\n');
 }
+
 /**
  * 
  * @param type
@@ -253,6 +297,7 @@ void read(DataType type, void * field, const unsigned int maxSize) {
         readFloat(field);
     }
 }
+
 /**
  * 
  * @param rtype
@@ -271,6 +316,7 @@ void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) 
     read(type, reg, aux[i].maxSize);
     puts("");
 }
+
 /**
  * 
  * @param rtype
@@ -293,6 +339,7 @@ void parsedRead(RequestType rtype, const unsigned short structTypeSize, void *li
     }
 
 }
+
 /**
  * 
  * @param rType
@@ -309,6 +356,7 @@ void fullRead(RequestType rType, const unsigned short structTypeSize, void * lis
     }
     puts("---------------------------------------------");
 }
+
 /**
  * 
  * @param structTypeSize
@@ -328,6 +376,7 @@ void update() {
 
 void delete() {
 };
+
 /**
  * 
  * @param list
@@ -362,7 +411,7 @@ int compareStrings(void *string_one, void *string_two) {
  * @param value_two
  * @return 
  */
-bool generalCompare(DataType type_one, void *value_one, DataType type_two, void *value_two) {
+bool generalCompare(DataType type_one, void *value_one, DataType type_two, void *value_two, char *signal) {
     //TODO nao esta a fazer cast
     if (type_one == INT) {
         *(int*) value_one = castInt(value_one);
@@ -375,12 +424,47 @@ bool generalCompare(DataType type_one, void *value_one, DataType type_two, void 
     } else if (type_two == FLOAT) {
         *(float*) value_two = castFloat(value_two);
     }
+    char cmpSignal[2 + 1];
+    strcpy(cmpSignal, "==");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one == *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, ">");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one > *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, "<");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one < *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, ">=");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one >= *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, "<=");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one <= *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, "!=");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one != *(int*) value_two) return true;
+        else return false;
+    }
 
-    //TODO nao fazer cast aqui
-    if (*(int*) value_one == *(int*) value_two) return true;
-    else return false;
 
 }
+
 /**
  * 
  * @param varType
@@ -389,16 +473,17 @@ bool generalCompare(DataType type_one, void *value_one, DataType type_two, void 
  * @param toCompareValue
  * @return 
  */
-bool compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue) {
+bool compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue, char *signal) {
     unsigned int toReturn = false;
     if (varType == STRING && toCompareType == STRING) {
         toReturn = compareStrings(varValue, toCompareValue);
     } else {
-        if (generalCompare(varType,varValue, toCompareType, toCompareValue) == true) toReturn = true;
+        if (generalCompare(varType, varValue, toCompareType, toCompareValue, signal) == true) toReturn = true;
         else toReturn = false;
     }
     return toReturn;
 }
+
 /**
  * 
  * @param field
@@ -410,9 +495,9 @@ bool compare(DataType varType, void* varValue, DataType toCompareType, void * to
  * @param searchValueType
  * @return 
  */
-int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType) {
-    #define MAX_RESULTS 10
-    unsigned int i = 0, j = 0, counter = 0;
+int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType, unsigned int *resultCounter, char *signal) {
+    unsigned int i = 0, j = 0;
+    *resultCounter = 0;
     void *reg;
     int atributeValue = NULL;
     static int resultKeys[MAX_RESULTS];
@@ -423,13 +508,13 @@ int * search(const unsigned int field, void *searchValue, void * list, FieldAux 
         DataType type = aux[field].type;
         //fazer cast para search value
         //TODO cast interface
-        unsigned int result = compare(type, &atributeValue, searchValueType, &searchValue);
+        unsigned int result = compare(type, &atributeValue, searchValueType, searchValue, signal);
         if (result == true) {
-            resultKeys[counter] = i;
-            counter++;
+            resultKeys[*resultCounter] = i;
+            (*resultCounter)++;
         }
     }
-    for (j = counter; j < MAX_RESULTS; j++) {
+    for (j = *resultCounter; j < MAX_RESULTS; j++) {
         resultKeys[j] = NO_VALUE;
     }
     return resultKeys;
@@ -462,6 +547,7 @@ int ordenar(int inf, int sup){
      }
 }
  */
+
 /**
  * 
  * @param vet
