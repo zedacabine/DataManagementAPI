@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     //menu();
     char NomeFicheiro[SHORT_STRING];
 
-    unsigned int contador, contadorPerguntas, contadorCategorias;
+    unsigned int contador, contadorPerguntas, contadorCategorias,contadorRespostas;
 
     //---------------------------------------------------------------------------------------------------------------//
 
@@ -60,11 +60,31 @@ int main(int argc, char** argv) {
 
     //---------------------------------------------------------------------------------------------------------------//
 
+    FieldAux estructAuxRespostas[] = {
+        {.fieldName = "id_resposta", .alias = "Numero Resposta", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
+        {.fieldName = "id_pergunta_resposta", .alias = "Numero Pergunta Resposta", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
+        {.fieldName = "resposta", .alias = "Resposta", . sizeBytes = LONG_STRING, .type = STRING}
+    };
+
+    Resposta respostas[100];
+    const unsigned int tamAuxResposta = (sizeof (estructAuxRespostas) / sizeof (estructAuxRespostas[0]));
+    const unsigned int tamTipoResposta = sizeof (Resposta);
+    const unsigned int tamArrayResposta = (sizeof (respostas) / sizeof (estructAuxRespostas[0]));
+
+    strcpy(NomeFicheiro, "respostas.txt");
+    readFile(NomeFicheiro, tamArrayResposta, respostas, &contador);
+
+    Class respostaClass = {.name = "Resposta", .StructTypeSize = tamTipoResposta, .data = respostas, .auxStruct = estructAuxRespostas, .elements = &contadorRespostas, .fieldsNumber = tamAuxResposta, .aliasField = RESPOSTA};
+
+
+    //---------------------------------------------------------------------------------------------------------------//
+
+
     FieldAux estructAuxPerguntas[] = {
         {.fieldName = "id_pergunta", .alias = "Numero Pergunta", .sizeBytes = INT_SIZE, .type = INT, .unique = true, .required = true, .autoIncrement = true, .step = 1},
         {.fieldName = "id_categoria_pergunta", .alias = "Numero Categoria", .sizeBytes = INT_SIZE, .type = INT, .required = true, .foreignKey = true, .parentPrimaryKey = ID_CATEGORIA, .parentClass = &categoriaClass},
         {.fieldName = "id_dificuldade_pergunta", .alias = "Numero Dificuldade", .sizeBytes = INT_SIZE, .type = INT, .required = true},
-        {.fieldName = "id_resposta_certa_pergunta", .alias = "Numero Resposta Certa", .sizeBytes = INT_SIZE, .type = INT, .required = true},
+        {.fieldName = "id_resposta_certa_pergunta", .alias = "Numero Resposta Certa", .sizeBytes = INT_SIZE, .type = INT, .required = true, .foreignKey = true, .parentPrimaryKey = ID_RESPOSTA, .parentClass = &respostaClass},
         {.fieldName = "pergunta", .alias = "Pergunta", .sizeBytes = LONG_STRING, .type = STRING, .required = true}
 
     };
@@ -144,21 +164,7 @@ int main(int argc, char** argv) {
     strcpy(NomeFicheiro, "jogos.txt");
     readFile(NomeFicheiro, tamArrayJogo, jogos, &contador);
 
-    //---------------------------------------------------------------------------------------------------------------//
 
-    FieldAux estructAuxRespostas[] = {
-        {.fieldName = "id_resposta", .alias = "Numero Resposta", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
-        {.fieldName = "id_pergunta_resposta", .alias = "Numero Pergunta Resposta", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
-        {.fieldName = "resposta", .alias = "Resposta", . sizeBytes = LONG_STRING, .type = STRING}
-    };
-
-    Resposta respostas[100];
-    const unsigned int tamAuxResposta = (sizeof (estructAuxRespostas) / sizeof (estructAuxRespostas[0]));
-    const unsigned int tamTipoResposta = sizeof (Resposta);
-    const unsigned int tamArrayResposta = (sizeof (respostas) / sizeof (estructAuxRespostas[0]));
-
-    strcpy(NomeFicheiro, "respostas.txt");
-    readFile(NomeFicheiro, tamArrayResposta, respostas, &contador);
 
     //---------------------------------------------------------------------------------------------------------------//
 
@@ -219,8 +225,8 @@ int main(int argc, char** argv) {
     //---------------------------------------------------------------------------------------------------------------//
 
     //inserirPergunta(perguntaClass);
-    //listarPerguntas(perguntaClass);
-    //listarPergunta(perguntaClass,contadorPerguntas-1);
+    listarPerguntas(perguntaClass);
+    //listarPergunta(perguntaClass,0);
     //filtrarPergunta(perguntaClass,contador-1,y,1);
     //pesquisarPerguntas(perguntaClass,ID_PERGUNTA,1);
     int i = 1;
@@ -229,10 +235,10 @@ int main(int argc, char** argv) {
     char sinal[2 + 1];
     strcpy(sinal, "==");
     //teste = pesquisarPerguntas(perguntaClass, ID_CATEGORIA_PERGUNTAS, &i, &counter, sinal);
-   // teste = pesquisarCategorias(categoriaClass, ID_CATEGORIA, &i, &counter, sinal);
+    //teste = pesquisarCategorias(categoriaClass, ID_CATEGORIA, &i, &counter, sinal);
     //filtrarCategorias(categoriaClass,teste, counter, y, 1);
-    filtrarPerguntas(perguntaClass, x, 1, y, 1);
-    
+    //filtrarPerguntas(perguntaClass, x, 1, y, 1);
+
     //funcao search a perder o valor do sinall
 
     //for (i = 0; i < counter; i++) printf("%d\n", *(teste + i));
