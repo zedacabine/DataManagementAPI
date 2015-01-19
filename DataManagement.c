@@ -1,6 +1,7 @@
 #include "DataManagement.h"
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 
 /**
  * 
@@ -269,13 +270,7 @@ bool compare(DataType varType, void* varValue, DataType toCompareType, void * to
  */
 int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType, unsigned int *resultCounter, char *signal) {
     unsigned int i = 0, j = 0;
-    //imprime
-    puts(signal);
-
     *resultCounter = 0;
-    //nao imprime
-    puts(signal);
-
     void *reg;
     int atributeValue = NULL;
 
@@ -287,7 +282,6 @@ int * search(const unsigned int field, void *searchValue, void * list, FieldAux 
         DataType type = aux[field].type;
         //fazer cast para search value
         //TODO cast interface
-
         unsigned int result = compare(type, &atributeValue, searchValueType, searchValue, signal);
         if (result == true) {
             resultKeys[*resultCounter] = i;
@@ -299,6 +293,19 @@ int * search(const unsigned int field, void *searchValue, void * list, FieldAux 
     }
     return resultKeys;
 };
+
+/**
+ * 
+ * @param class
+ * @param key
+ * @param fields
+ * @param fieldsNumber
+ */
+void singleParsedList(Class class, const unsigned int key, int *fields, unsigned fieldsNumber) {
+
+    int keys[] = {key};
+    parsedList(class.data, class.StructTypeSize, class.auxStruct, keys, 1, fields, fieldsNumber);
+}
 
 /**
  * 
@@ -315,19 +322,25 @@ void listRegistry(void * reg, FieldAux *aux, unsigned field) {
 
 
     if (aux[i].foreignKey == true) {
-        unsigned short resultNumber;
+        unsigned int resultNumber;
         char signal[2 + 1];
         strcpy(signal, "==");
         int *result;
         result = search(aux[i].parentPrimaryKey, reg, aux[i].parentClass->data, aux[i].parentClass->auxStruct, *(aux[i].parentClass->elements), aux[i].parentClass->StructTypeSize, aux[i].type, &resultNumber, signal);
-
-        for (j = 0; j < resultNumber; j++) printf("%d\n", *(result + j));
+        //listRegistry(reg,aux[i].parentClass->auxStruct,aux[i].parentClass->aliasField);
+        int key[1];
+        int field[1];
+        key[0] = *(result + 0);
+        field[0] = aux[i].parentClass->aliasField;
+        parsedList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, aux[i].parentClass->auxStruct, key, resultNumber, field, 1);
+        //?? nao da nao sei porque
+        //singleParsedList(aux[i].parentClass,*(result + 0),field,1);
+    } else if (aux[i].foreignKey != true) {
+        printString(aux[i].alias);
+        print(type, reg);
     }
-
-    printString(aux[i].alias);
-    print(type, reg);
-
     puts("");
+
 }
 
 /**
@@ -380,19 +393,6 @@ void singleList(Class class, const unsigned int key) {
         fields[i] = i;
     }
     parsedList(class.data, class.StructTypeSize, class.auxStruct, keys, 1, fields, class.fieldsNumber);
-}
-
-/**
- * 
- * @param class
- * @param key
- * @param fields
- * @param fieldsNumber
- */
-void singleParsedList(Class class, const unsigned int key, int *fields, unsigned fieldsNumber) {
-
-    int keys[] = {key};
-    parsedList(class.data, class.StructTypeSize, class.auxStruct, keys, 1, fields, fieldsNumber);
 }
 
 /**
