@@ -26,6 +26,7 @@
       <itemPath>Ajudas.c</itemPath>
       <itemPath>Categoria.c</itemPath>
       <itemPath>DataManagement.c</itemPath>
+      <itemPath>Dificuldade.c</itemPath>
       <itemPath>Genero.c</itemPath>
       <itemPath>Jogadas.c</itemPath>
       <itemPath>Jogo.c</itemPath>
@@ -71,6 +72,8 @@
       <item path="DataManagement.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="DataManagement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Dificuldade.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Dificuldade.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -146,6 +149,8 @@
       <item path="DataManagement.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="DataManagement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Dificuldade.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Dificuldade.h" ex="false" tool="3" flavor2="0">
       </item>

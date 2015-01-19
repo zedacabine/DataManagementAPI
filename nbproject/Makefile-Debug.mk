@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Ajudas.o \
 	${OBJECTDIR}/Categoria.o \
 	${OBJECTDIR}/DataManagement.o \
+	${OBJECTDIR}/Dificuldade.o \
 	${OBJECTDIR}/Genero.o \
 	${OBJECTDIR}/Jogadas.o \
 	${OBJECTDIR}/Jogo.o \
@@ -89,6 +90,11 @@ ${OBJECTDIR}/DataManagement.o: DataManagement.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataManagement.o DataManagement.c
+
+${OBJECTDIR}/Dificuldade.o: Dificuldade.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Dificuldade.o Dificuldade.c
 
 ${OBJECTDIR}/Genero.o: Genero.c 
 	${MKDIR} -p ${OBJECTDIR}

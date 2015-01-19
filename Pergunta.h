@@ -13,7 +13,7 @@
 extern "C" {
 #endif
     
-#define MAX_PERGUNTAS 100
+#define MAX_PERGUNTA 100
     
     typedef struct {
         unsigned int id_pergunta;
