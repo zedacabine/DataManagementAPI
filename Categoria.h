@@ -13,7 +13,7 @@
 extern "C" {
 #endif
 
-#define MAX_CATEGORIAS 100
+#define MAX_CATEGORIA 100
     typedef struct {
         unsigned int id_categoria;
         char categoria[SHORT_STRING];

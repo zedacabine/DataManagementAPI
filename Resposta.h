@@ -12,7 +12,7 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+#define MAX_RESPOSTA 150
     typedef struct {
         unsigned int id_resposta;
         unsigned int id_pergunta;

@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+#define MAX_TIPO_RESPOSTA 100
     typedef struct {
         unsigned int id_tipo_resposta;
         char tipo_resposta[SHORT_STRING];

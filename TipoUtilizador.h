@@ -13,6 +13,7 @@
 extern "C" {
 #endif
 
+#define MAX_TIPO_UTILIZADOR 4
     typedef struct {
         unsigned int id_utilizador;
         char tipo_utilizador;

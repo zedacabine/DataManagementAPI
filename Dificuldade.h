@@ -12,7 +12,7 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+#define MAX_DIFICULDADE 4
     typedef struct {
         unsigned int id_dificuldade;
         char dificuldade[SHORT_STRING];

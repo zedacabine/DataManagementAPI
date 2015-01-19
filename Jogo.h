@@ -13,6 +13,7 @@
 extern "C" {
 #endif
 
+#define MAX_JOGO 100
     typedef struct {
         unsigned int id_jogo;
         unsigned int id_utilizador;

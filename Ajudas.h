@@ -13,6 +13,7 @@
 extern "C" {
 #endif
 
+#define MAX_AJUDA 4
     typedef struct {
         unsigned int id_ajuda;
         char ajudas[MEDIUM_STRING];
