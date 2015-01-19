@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     //menu();
     char NomeFicheiro[SHORT_STRING];
 
-    unsigned int contador, contadorPerguntas, contadorCategorias, contadorRespostas, contadorTipoUtilizadores, contadorAjudas, contadorDificuldades, contadorTipoResposta, contadorJogadas,contadorJogos;
+    unsigned int contador, contadorPerguntas, contadorCategorias, contadorRespostas, contadorTipoUtilizadores, contadorAjudas, contadorDificuldades, contadorTipoResposta, contadorJogadas, contadorJogos,contadorUtilizadores;
 
     //---------------------------------------------------------------------------------------------------------------//
 
@@ -175,7 +175,7 @@ int main(int argc, char** argv) {
     Class jogoClass = {.name = "Jogo", .StructTypeSize = tamTipoJogo, .data = jogos, .auxStruct = estructAuxJogos, .elements = &contadorJogos, .fieldsNumber = tamAuxJogo};
 
     strcpy(NomeFicheiro, "jogos.txt");
-    readFile(NomeFicheiro, jogoClass,MAX_JOGO);
+    readFile(NomeFicheiro, jogoClass, MAX_JOGO);
     //---------------------------------------------------------------------------------------------------------------//
 
     FieldAux estructAuxTipoRespostas[] = {
@@ -192,7 +192,7 @@ int main(int argc, char** argv) {
     Class tipoRespostaClass = {.name = "Tipo Resposta", .StructTypeSize = tamTipoTipoResposta, .data = tipoRespostas, .auxStruct = estructAuxTipoRespostas, .elements = &contadorTipoResposta, .fieldsNumber = tamAuxTipoResposta, .aliasField = TIPO_RESPOSTA};
 
     strcpy(NomeFicheiro, "tiporespostas.txt");
-    //readFile(NomeFicheiro, Class tipoResposta, MAX_TIPO_RESPOSTA);
+    readFile(NomeFicheiro, tipoRespostaClass, MAX_TIPO_RESPOSTA);
 
 
     //---------------------------------------------------------------------------------------------------------------//
@@ -207,10 +207,10 @@ int main(int argc, char** argv) {
     const unsigned int tamTipoTipoUtilizador = sizeof (TipoUtilizador);
     const unsigned int tamArrayTipoUtilizador = (sizeof (tipoUtilizadores) / sizeof (estructAuxTipoUtilizadores[0]));
 
-    Class tipUtilizadorClass = {.name = "Tipo Utilizador", .StructTypeSize = tamTipoTipoUtilizador, .data = tipoUtilizadores, .auxStruct = estructAuxTipoUtilizadores, .elements = &contadorTipoUtilizadores, .fieldsNumber = tamAuxTipoUtilizador, .aliasField = DIFICULDADE};
+    Class tipoUtilizadorClass = {.name = "Tipo Utilizador", .StructTypeSize = tamTipoTipoUtilizador, .data = tipoUtilizadores, .auxStruct = estructAuxTipoUtilizadores, .elements = &contadorTipoUtilizadores, .fieldsNumber = tamAuxTipoUtilizador, .aliasField = DIFICULDADE};
 
     strcpy(NomeFicheiro, "tipoutilizadores.txt");
-    //readFile(NomeFicheiro,Class tipoUtilizador, MAX_TIPO_UTILIZADOR);
+    readFile(NomeFicheiro, tipoUtilizadorClass, MAX_TIPO_UTILIZADOR);
 
     //---------------------------------------------------------------------------------------------------------------//
 
@@ -226,8 +226,10 @@ int main(int argc, char** argv) {
     const unsigned int tamTipoUtilizador = sizeof (Utilizador);
     const unsigned int tamArrayUtilizador = (sizeof (utilizadores) / sizeof (estructAuxUtilizadores[0]));
 
+    Class utilizadorClass = {.name = "Utilizador", .StructTypeSize = tamTipoUtilizador, .data = utilizadores, .auxStruct = estructAuxUtilizadores, .elements = &contadorUtilizadores, .fieldsNumber = tamAuxUtilizador, .aliasField = NOME};
+
     strcpy(NomeFicheiro, "utilizador.txt");
-    //readFile(NomeFicheiro, utilizadorClass, MAX_UTILIZADOR);
+    readFile(NomeFicheiro, utilizadorClass, MAX_UTILIZADOR);
 
 
     //---------------------------------------------------------------------------------------------------------------//
