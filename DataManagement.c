@@ -457,12 +457,28 @@ void read(DataType type, void * field, const unsigned int maxSize) {
  * @param field
  */
 void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) {
-    unsigned i;
+    unsigned i,j;
     for (i = 0; i < field; ++i) {
         reg = reg + aux[i].sizeBytes;
     }
     DataType type = aux[i].type;
-
+    
+    if (aux[i].foreignKey == true) {
+        unsigned int resultNumber;
+        char signal[2 + 1];
+        strcpy(signal, "==");
+        int *result;
+        result = search(aux[i].parentPrimaryKey, reg, aux[i].parentClass->data, aux[i].parentClass->auxStruct, *(aux[i].parentClass->elements), aux[i].parentClass->StructTypeSize, aux[i].type, &resultNumber, signal);
+        //listRegistry(reg,aux[i].parentClass->auxStruct,aux[i].parentClass->aliasField);
+        int key[100];
+        int field[1];
+        for(j=0;j<resultNumber;j++){
+            key[j]= *(result + j);
+        }
+        field[0] = aux[i].parentClass->aliasField;
+        parsedList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, aux[i].parentClass->auxStruct, key, resultNumber, field, aux[i].parentClass->fieldsNumber);
+    }
+    
     printString(aux[i].alias);
     read(type, reg, aux[i].maxSize);
     puts("");
