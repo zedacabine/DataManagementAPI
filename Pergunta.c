@@ -1,15 +1,17 @@
 #include "DataManagement.h"
 #include "Pergunta.h"
+#include <string.h>
 
-void inserirPergunta(Class perguntaClasse) {
+void inserirPergunta(Class perguntaClass) {
 
-    create(perguntaClasse.StructTypeSize, perguntaClasse.data, perguntaClasse.elements, perguntaClasse.auxStruct, perguntaClasse.fieldsNumber);
+    create(perguntaClass.StructTypeSize, perguntaClass.data, perguntaClass.elements, perguntaClass.auxStruct, perguntaClass.fieldsNumber);
+    char NomeFicheiro[SHORT_STRING];
+    strcpy(NomeFicheiro, "perguntas.txt");
+    writeFile(NomeFicheiro, perguntaClass);
 }
 
 void listarPerguntas(Class perguntaClass) {
-
     fullList(perguntaClass.data, perguntaClass.StructTypeSize, (*perguntaClass.elements), perguntaClass.auxStruct, perguntaClass.fieldsNumber);
-
 }
 
 void listarPergunta(Class perguntaClass, const unsigned int chave) {
