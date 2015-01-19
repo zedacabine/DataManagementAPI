@@ -1,9 +1,12 @@
 #include "DataManagement.h"
 #include "Dificuldade.h"
+#include <string.h>
 
-void inserirDificuldade(Class dificuldadeClasse) {
-
-    create(dificuldadeClasse.StructTypeSize, dificuldadeClasse.data, dificuldadeClasse.elements, dificuldadeClasse.auxStruct, dificuldadeClasse.fieldsNumber);
+void inserirDificuldade(Class dificuldadeClass) {
+    create(dificuldadeClass.StructTypeSize, dificuldadeClass.data, dificuldadeClass.elements, dificuldadeClass.auxStruct, dificuldadeClass.fieldsNumber);
+    char NomeFicheiro[SHORT_STRING];
+    strcpy(NomeFicheiro, "dificuldades.txt");
+    writeFile(NomeFicheiro, dificuldadeClass);
 }
 
 void listarDificuldades(Class dificuldadeClass) {

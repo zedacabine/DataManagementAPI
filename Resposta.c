@@ -1,36 +1,40 @@
 #include "DataManagement.h"
 #include "Resposta.h"
+#include <string.h>
 
-void inserirResposta(Class perguntaClasse) {
+void inserirResposta(Class respostaClass) {
 
-    create(perguntaClasse.StructTypeSize, perguntaClasse.data, perguntaClasse.elements, perguntaClasse.auxStruct, perguntaClasse.fieldsNumber);
+    create(respostaClass.StructTypeSize, respostaClass.data, respostaClass.elements, respostaClass.auxStruct, respostaClass.fieldsNumber);
+     char NomeFicheiro[SHORT_STRING];
+    strcpy(NomeFicheiro, "respostas.txt");
+    writeFile(NomeFicheiro, respostaClass);
 }
 
-void listarRespostas(Class perguntaClass) {
+void listarRespostas(Class respostaClass) {
 
-    fullList(perguntaClass.data, perguntaClass.StructTypeSize, (*perguntaClass.elements), perguntaClass.auxStruct, perguntaClass.fieldsNumber);
+    fullList(respostaClass.data, respostaClass.StructTypeSize, (*respostaClass.elements), respostaClass.auxStruct, respostaClass.fieldsNumber);
 
 }
 
-void listarResposta(Class perguntaClass, const unsigned int chave) {
+void listarResposta(Class respostaClass, const unsigned int chave) {
 
-    singleList(perguntaClass, chave);
+    singleList(respostaClass, chave);
 }
 
-void filtrarRespostas(Class perguntaClass, int *chaves, int numeroChaves, int *campos, int numeroCampos) {
+void filtrarRespostas(Class respostaClass, int *chaves, int numeroChaves, int *campos, int numeroCampos) {
 
-    parsedList(perguntaClass.data, perguntaClass.StructTypeSize, perguntaClass.auxStruct, chaves, numeroChaves, campos, numeroCampos);
+    parsedList(respostaClass.data, respostaClass.StructTypeSize, respostaClass.auxStruct, chaves, numeroChaves, campos, numeroCampos);
 }
 
-void filtrarResposta(Class perguntaClass, int chave, int *campos, int numeroCampos) {
+void filtrarResposta(Class respostaClass, int chave, int *campos, int numeroCampos) {
 
-    singleParsedList(perguntaClass, chave, campos, numeroCampos);
+    singleParsedList(respostaClass, chave, campos, numeroCampos);
 }
 
-void pesquisarRespostas(Class perguntaClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
-    FieldAux *aux = perguntaClass.auxStruct;
+void pesquisarRespostas(Class respostaClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
+    FieldAux *aux = respostaClass.auxStruct;
     aux[campo].type;
-    search(campo, valorPesquisar,perguntaClass.data,perguntaClass.auxStruct,(*perguntaClass.elements),perguntaClass.StructTypeSize,aux[campo].type,numeroResultados,sinal) ;
+    search(campo, valorPesquisar,respostaClass.data,respostaClass.auxStruct,(*respostaClass.elements),respostaClass.StructTypeSize,aux[campo].type,numeroResultados,sinal) ;
 
     }
 

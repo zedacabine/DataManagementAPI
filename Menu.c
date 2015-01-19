@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include "Pergunta.h"
 
 void clearscreen() {
     printf("\033[2J");
     printf("\033[H");
 }
 
-void menu_jogar() {
+void menuJogar(Class * arrayClass) {
     int opcao;
     do {
         clearscreen();
@@ -21,14 +22,14 @@ void menu_jogar() {
                 break;
             case 2: printf("    Por dificuldade");
                 break;
-            case 3: menu();
+            case 3: menu(arrayClass);
                 break;
 
         }
     } while (opcao != 3);
 }
 
-void records() {
+void records(Class arrayClass) {
     int opcao;
     do {
         clearscreen();
@@ -52,43 +53,98 @@ void records() {
                 break;
             case 5: printf("Pesquisar Perguntas");
                 break;
-            case 6: menu();
+            case 6: menu(arrayClass);
                 break;
 
         }
     } while (opcao != 6);
 }
 
-void gestaodejogo() {
+void gestaoPerguntas(Class arrayClass) {
     int opcao;
     do {
         clearscreen();
         printf("    1- Adicionar Perguntas     \n");
         printf("    2- Remover Perguntas     \n");
         printf("    3- Editar Perguntas     \n");
-        printf("    4- Visualizars Perguntas     \n");
+        printf("    4- Visualizar Perguntas     \n");
         printf("    5- Pesquisar Perguntas     \n");
         printf("    6- Voltar  \n");
         do {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: printf("    1- Adicionar Perguntas     \n");;
+            case 1: inserirPergunta(arrayClass);
                 break;
-            case 2: printf("    1- Adicionar Perguntas     \n");;
+            case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");;
+            case 3: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 4: printf("    1- Adicionar Perguntas     \n");;
+            case 4: listarPerguntas(arrayClass);
                 break;
-            case 5: printf("    1- Adicionar Perguntas     \n");;
+            case 5: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 6: menu();
+            case 6: menuGestao(arrayClass);
                 break;
 
         }
     } while (opcao != 6);
 
+}
+void gestaoCategorias(Class arrayClass) {
+    int opcao;
+    do {
+        clearscreen();
+        printf("    1- Adicionar categorias     \n");
+        printf("    2- Remover categorias    \n");
+        printf("    3- Editar categorias    \n");
+        printf("    4- Visualizar categorias     \n");
+        printf("    5- Pesquisar categorias    \n");
+        printf("    6- Voltar  \n");
+        do {
+            scanf("%d", &opcao);
+        } while (opcao < 0 || opcao > 6);
+        switch (opcao) {
+            case 1: inserirCategoria(arrayClass);
+                break;
+            case 2: printf("    1- Adicionar Perguntas     \n");
+                break;
+            case 3: printf("    1- Adicionar Perguntas     \n");
+                break;
+            case 4: listarCategorias(arrayClass);
+                break;
+            case 5: printf("    1- Adicionar Perguntas     \n");
+                break;
+            case 6: menuGestao(arrayClass);
+                break;
+
+        }
+    } while (opcao != 6);
+
+}
+
+void menuGestao(Class * arrayClass) {
+    int opcao;
+    do {
+        clearscreen();
+        printf("   1- Perguntas   \n");
+        printf("   2- Categorias    \n");
+        printf("   3- Voltar    \n");
+       
+
+        do {
+            scanf("%d", &opcao);
+        } while (opcao < 0 || opcao > 3);
+        switch (opcao) {
+            case 1: gestaoPerguntas(arrayClass[0]);
+                break;
+            case 2: gestaoCategorias(arrayClass[1]);
+                break;
+            case 3: menu(arrayClass);
+                break;
+            
+        }
+    } while (opcao != 3);
 }
 
 void ficheiros() {
@@ -114,7 +170,7 @@ void ficheiros() {
     } while (opcao != 3);
 }
 
-void menu() {
+void menu(Class * arrayClass) {
     int opcao;
     do {
         clearscreen();
@@ -127,15 +183,14 @@ void menu() {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 4);
         switch (opcao) {
-            case 1: menu_jogar();
+            case 1: menuJogar(arrayClass);
                 break;
-            case 2: gestaodejogo();
+            case 2: menuGestao(arrayClass);
                 break;
             case 3: puts("Ola");
                 break;
             case 4: ficheiros();
                 break;
-
         }
     } while (opcao != 4);
 }

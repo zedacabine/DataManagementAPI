@@ -1,10 +1,11 @@
 #include "DataManagement.h"
 #include "Categoria.h"
+#include <string.h>
 
 void inserirCategoria(Class categoriaClass) {
 
     create(categoriaClass.StructTypeSize, categoriaClass.data, categoriaClass.elements, categoriaClass.auxStruct, categoriaClass.fieldsNumber);
-     char NomeFicheiro[SHORT_STRING];
+    char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "categorias.txt");
     writeFile(NomeFicheiro, categoriaClass);
 }
@@ -30,10 +31,10 @@ void filtrarCategoria(Class categoriaClass, int chave, int *campos, int numeroCa
     singleParsedList(categoriaClass, chave, campos, numeroCampos);
 }
 
-void pesquisarCategorias(Class categoriaClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
+void pesquisarCategorias(Class categoriaClass, const unsigned int campo, void *valorPesquisar, unsigned int *numeroResultados, char *sinal) {
     FieldAux *aux = categoriaClass.auxStruct;
     aux[campo].type;
-    search(campo, valorPesquisar,categoriaClass.data,categoriaClass.auxStruct,(*categoriaClass.elements),categoriaClass.StructTypeSize,aux[campo].type,numeroResultados,sinal) ;
+    search(campo, valorPesquisar, categoriaClass.data, categoriaClass.auxStruct, (*categoriaClass.elements), categoriaClass.StructTypeSize, aux[campo].type, numeroResultados, sinal);
 
-    }
+}
 

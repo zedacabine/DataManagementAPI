@@ -237,14 +237,15 @@ int main(int argc, char** argv) {
     int x[] = {0, 1};
     int y[] = {ID_CATEGORIA_PERGUNTAS};
 
-    Class arrayClass[] = {perguntaClass, categoriaClass, respostaClass, dificuldadeClass};
-
+    Class arrayClass[] = {perguntaClass, categoriaClass, respostaClass, dificuldadeClass, ajudaClass, jogadaClass, jogoClass, tipoUtilizadorClass, tipoRespostaClass, utilizadorClass};
+    menu(arrayClass);
+    
     //---------------------------------------------------------------------------------------------------------------//
 
     //inserirPergunta(perguntaClass);
     //listarPerguntas(perguntaClass);
-    inserirResposta(respostaClass);
-    listarRespostas(respostaClass);
+    //inserirResposta(respostaClass);
+    //listarRespostas(respostaClass);
     //listarPergunta(perguntaClass,0);
     //filtrarPergunta(perguntaClass,contador-1,y,1);
     //pesquisarPerguntas(perguntaClass,ID_PERGUNTA,1);
