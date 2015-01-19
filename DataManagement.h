@@ -62,6 +62,7 @@ extern "C" {
         void *auxStruct;
         unsigned int *elements;
         unsigned int fieldsNumber;
+        unsigned int aliasField;
     } Class;
 
     typedef struct {

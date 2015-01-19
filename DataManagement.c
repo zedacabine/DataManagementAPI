@@ -160,6 +160,146 @@ void print(const DataType type, const void *const val) {
     }
 }
 
+int searchSigle();
+
+/**
+ * 
+ * @param string_one
+ * @param string_two
+ * @return 
+ */
+int compareStrings(void *string_one, void *string_two) {
+    string_one = castString(string_one);
+    string_two = castString(string_two);
+    if (strcmp(string_one, string_two) == 0) return true;
+    else return false;
+}
+
+/**
+ * 
+ * @param type_one
+ * @param value_one
+ * @param type_two
+ * @param value_two
+ * @return 
+ */
+bool generalCompare(DataType type_one, void *value_one, DataType type_two, void *value_two, char *signal) {
+    //TODO nao esta a fazer cast
+    if (type_one == INT) {
+        *(int*) value_one = castInt(value_one);
+        //printf("%d", value_one);
+    } else if (type_one == FLOAT) {
+        *(float*) value_one = castFloat(&value_one);
+    }
+    if (type_two == INT) {
+        *(int*) value_two = castInt(value_two);
+    } else if (type_two == FLOAT) {
+        *(float*) value_two = castFloat(value_two);
+    }
+    char cmpSignal[2 + 1];
+    strcpy(cmpSignal, "==");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one == *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, ">");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one > *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, "<");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one < *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, ">=");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one >= *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, "<=");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one <= *(int*) value_two) return true;
+        else return false;
+    }
+    strcpy(cmpSignal, "!=");
+    if (compareStrings(signal, cmpSignal) == true) {
+        //TODO nao fazer cast aqui
+        if (*(int*) value_one != *(int*) value_two) return true;
+        else return false;
+    }
+
+
+}
+
+/**
+ * 
+ * @param varType
+ * @param varValue
+ * @param toCompareType
+ * @param toCompareValue
+ * @return 
+ */
+bool compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue, char *signal) {
+    unsigned int toReturn = false;
+    if (varType == STRING && toCompareType == STRING) {
+        toReturn = compareStrings(varValue, toCompareValue);
+    } else {
+        if (generalCompare(varType, varValue, toCompareType, toCompareValue, signal) == true) toReturn = true;
+        else toReturn = false;
+    }
+    return toReturn;
+}
+
+/**
+ * 
+ * @param field
+ * @param searchValue
+ * @param list
+ * @param aux
+ * @param elementsNumber
+ * @param structTypeSize
+ * @param searchValueType
+ * @return 
+ */
+int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType, unsigned int *resultCounter, char *signal) {
+    unsigned int i = 0, j = 0;
+    //imprime
+    puts(signal);
+
+    *resultCounter = 0;
+    //nao imprime
+    puts(signal);
+
+    void *reg;
+    int atributeValue = NULL;
+
+    static int resultKeys[MAX_RESULTS];
+    for (i = 0; i < elementsNumber; i++) {
+        reg = list + (structTypeSize * i);
+        //TODO implementar a função elementMemoryAdress
+        getAtributeValue(reg, aux, field, &atributeValue);
+        DataType type = aux[field].type;
+        //fazer cast para search value
+        //TODO cast interface
+
+        unsigned int result = compare(type, &atributeValue, searchValueType, searchValue, signal);
+        if (result == true) {
+            resultKeys[*resultCounter] = i;
+            (*resultCounter)++;
+        }
+    }
+    for (j = *resultCounter; j < MAX_RESULTS; j++) {
+        resultKeys[j] = NO_VALUE;
+    }
+    return resultKeys;
+};
+
 /**
  * 
  * @param reg
@@ -167,15 +307,26 @@ void print(const DataType type, const void *const val) {
  * @param field
  */
 void listRegistry(void * reg, FieldAux *aux, unsigned field) {
-    unsigned i;
+    unsigned i, j;
     for (i = 0; i < field; ++i) {
         reg = reg + aux[i].sizeBytes;
     }
     DataType type = aux[i].type;
-    if (type == STRUCT) {
+
+
+    if (aux[i].foreignKey == true) {
+        unsigned short resultNumber;
+        char signal[2 + 1];
+        strcpy(signal, "==");
+        int *result;
+        result = search(aux[i].parentPrimaryKey, reg, aux[i].parentClass->data, aux[i].parentClass->auxStruct, *(aux[i].parentClass->elements), aux[i].parentClass->StructTypeSize, aux[i].type, &resultNumber, signal);
+
+        for (j = 0; j < resultNumber; j++) printf("%d\n", *(result + j));
     }
+
     printString(aux[i].alias);
     print(type, reg);
+
     puts("");
 }
 
@@ -388,137 +539,8 @@ void elementMemoryAdress(void * list, const unsigned int structTypeSize, const u
     storage = list + (structTypeSize * elementNumber);
 }
 
-int searchSigle();
-
-/**
- * 
- * @param string_one
- * @param string_two
- * @return 
- */
-int compareStrings(void *string_one, void *string_two) {
-    string_one = castString(string_one);
-    string_two = castString(string_two);
-    if (strcmp(string_one, string_two) == 0) return true;
-    else return false;
-}
-
-/**
- * 
- * @param type_one
- * @param value_one
- * @param type_two
- * @param value_two
- * @return 
- */
-bool generalCompare(DataType type_one, void *value_one, DataType type_two, void *value_two, char *signal) {
-    //TODO nao esta a fazer cast
-    if (type_one == INT) {
-        *(int*) value_one = castInt(value_one);
-        //printf("%d", value_one);
-    } else if (type_one == FLOAT) {
-        *(float*) value_one = castFloat(&value_one);
-    }
-    if (type_two == INT) {
-        *(int*) value_two = castInt(value_two);
-    } else if (type_two == FLOAT) {
-        *(float*) value_two = castFloat(value_two);
-    }
-    char cmpSignal[2 + 1];
-    strcpy(cmpSignal, "==");
-    if (compareStrings(signal, cmpSignal) == true) {
-        //TODO nao fazer cast aqui
-        if (*(int*) value_one == *(int*) value_two) return true;
-        else return false;
-    }
-    strcpy(cmpSignal, ">");
-    if (compareStrings(signal, cmpSignal) == true) {
-        //TODO nao fazer cast aqui
-        if (*(int*) value_one > *(int*) value_two) return true;
-        else return false;
-    }
-    strcpy(cmpSignal, "<");
-    if (compareStrings(signal, cmpSignal) == true) {
-        //TODO nao fazer cast aqui
-        if (*(int*) value_one < *(int*) value_two) return true;
-        else return false;
-    }
-    strcpy(cmpSignal, ">=");
-    if (compareStrings(signal, cmpSignal) == true) {
-        //TODO nao fazer cast aqui
-        if (*(int*) value_one >= *(int*) value_two) return true;
-        else return false;
-    }
-    strcpy(cmpSignal, "<=");
-    if (compareStrings(signal, cmpSignal) == true) {
-        //TODO nao fazer cast aqui
-        if (*(int*) value_one <= *(int*) value_two) return true;
-        else return false;
-    }
-    strcpy(cmpSignal, "!=");
-    if (compareStrings(signal, cmpSignal) == true) {
-        //TODO nao fazer cast aqui
-        if (*(int*) value_one != *(int*) value_two) return true;
-        else return false;
-    }
 
 
-}
-
-/**
- * 
- * @param varType
- * @param varValue
- * @param toCompareType
- * @param toCompareValue
- * @return 
- */
-bool compare(DataType varType, void* varValue, DataType toCompareType, void * toCompareValue, char *signal) {
-    unsigned int toReturn = false;
-    if (varType == STRING && toCompareType == STRING) {
-        toReturn = compareStrings(varValue, toCompareValue);
-    } else {
-        if (generalCompare(varType, varValue, toCompareType, toCompareValue, signal) == true) toReturn = true;
-        else toReturn = false;
-    }
-    return toReturn;
-}
-
-/**
- * 
- * @param field
- * @param searchValue
- * @param list
- * @param aux
- * @param elementsNumber
- * @param structTypeSize
- * @param searchValueType
- * @return 
- */
-int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType, unsigned int *resultCounter, char *signal) {
-    unsigned int i = 0, j = 0;
-    *resultCounter = 0;
-    void *reg;
-    int atributeValue = NULL;
-    static int resultKeys[MAX_RESULTS];
-    for (i = 0; i < elementsNumber; i++) {
-        reg = list + (structTypeSize * i);
-        //TODO implementar a função elementMemoryAdress
-        getAtributeValue(reg, aux, field, &atributeValue);
-        DataType type = aux[field].type;
-        //fazer cast para search value
-        //TODO cast interface
-        unsigned int result = compare(type, &atributeValue, searchValueType, searchValue, signal);
-        if (result == true) {
-            resultKeys[*resultCounter] = i;
-            (*resultCounter)++;
-        }
-    }
-    for (j = *resultCounter; j < MAX_RESULTS; j++) {
-        resultKeys[j] = NO_VALUE;
-    }
-    return resultKeys;
-};
 
 /*
 int ordenar(int inf, int sup){

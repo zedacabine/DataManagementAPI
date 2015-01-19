@@ -27,10 +27,10 @@ void filtrarCategoria(Class categoriaClass, int chave, int *campos, int numeroCa
     singleParsedList(categoriaClass, chave, campos, numeroCampos);
 }
 
-void pesquisarCategorias(Class categoriaClass,const unsigned int campo,void *valorPesquisar){
+void pesquisarCategorias(Class categoriaClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
     FieldAux *aux = categoriaClass.auxStruct;
     aux[campo].type;
-    search(campo, valorPesquisar,categoriaClass.data,categoriaClass.auxStruct,categoriaClass.elements,categoriaClass.StructTypeSize,aux[campo].type);
+    search(campo, valorPesquisar,categoriaClass.data,categoriaClass.auxStruct,(*categoriaClass.elements),categoriaClass.StructTypeSize,aux[campo].type,numeroResultados,sinal) ;
 
     }
 
