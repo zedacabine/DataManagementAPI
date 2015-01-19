@@ -12,7 +12,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    
+#define MAX_PERGUNTAS 100
+    
     typedef struct {
         unsigned int id_pergunta;
         unsigned int id_categoria;
