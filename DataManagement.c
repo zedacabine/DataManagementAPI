@@ -375,7 +375,7 @@ void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, 
         for (j = 0; j < fieldsNumber; j++) {
             listRegistry(list + (structTypeSize * elements[i]), aux, fields[j]);
         }
-        puts("---------------------------------------------");
+        //puts("---------------------------------------------");
     }
 }
 

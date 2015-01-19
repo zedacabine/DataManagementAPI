@@ -10,7 +10,7 @@ void inserirUtilizador(Class utilizadorClass) {
     writeFile(NomeFicheiro, utilizadorClass);
 }
 
-void listarUtilizadors(Class utilizadorClass) {
+void listarUtilizadores(Class utilizadorClass) {
 
     fullList(utilizadorClass.data, utilizadorClass.StructTypeSize, (*utilizadorClass.elements), utilizadorClass.auxStruct, utilizadorClass.fieldsNumber);
 
@@ -21,7 +21,7 @@ void listarUtilizador(Class utilizadorClass, const unsigned int chave) {
     singleList(utilizadorClass, chave);
 }
 
-void filtrarUtilizadors(Class utilizadorClass, int *chaves, int numeroChaves, int *campos, int numeroCampos) {
+void filtrarUtilizadores(Class utilizadorClass, int *chaves, int numeroChaves, int *campos, int numeroCampos) {
 
     parsedList(utilizadorClass.data, utilizadorClass.StructTypeSize, utilizadorClass.auxStruct, chaves, numeroChaves, campos, numeroCampos);
 }
@@ -31,7 +31,7 @@ void filtrarUtilizador(Class utilizadorClass, int chave, int *campos, int numero
     singleParsedList(utilizadorClass, chave, campos, numeroCampos);
 }
 
-void pesquisarUtilizadors(Class utilizadorClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
+void pesquisarUtilizadores(Class utilizadorClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
     FieldAux *aux = utilizadorClass.auxStruct;
     aux[campo].type;
     search(campo, valorPesquisar,utilizadorClass.data,utilizadorClass.auxStruct,(*utilizadorClass.elements),utilizadorClass.StructTypeSize,aux[campo].type,numeroResultados,sinal) ;

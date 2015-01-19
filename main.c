@@ -199,7 +199,7 @@ int main(int argc, char** argv) {
 
     FieldAux estructAuxTipoUtilizadores[] = {
         {.fieldName = "id_tipo_utilizador", .alias = "Numero Tipo Utilizador", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
-        {.fieldName = "tipo_utilizador", .alias = "Tipo Utilizador", .sizeBytes = BOOL_SIZE, .type = BOOL}
+        {.fieldName = "tipo_utilizador", .alias = "Tipo Utilizador", .sizeBytes = MEDIUM_STRING, .type = STRING}
     };
 
     TipoUtilizador tipoUtilizadores[2];
@@ -209,7 +209,7 @@ int main(int argc, char** argv) {
 
     Class tipoUtilizadorClass = {.name = "Tipo Utilizador", .StructTypeSize = tamTipoTipoUtilizador, .data = tipoUtilizadores, .auxStruct = estructAuxTipoUtilizadores, .elements = &contadorTipoUtilizadores, .fieldsNumber = tamAuxTipoUtilizador, .aliasField = DIFICULDADE};
 
-    strcpy(NomeFicheiro, "tipoutilizadores.txt");
+    strcpy(NomeFicheiro, "tipoUtilizadores.txt");
     readFile(NomeFicheiro, tipoUtilizadorClass, MAX_TIPO_UTILIZADOR);
 
     //---------------------------------------------------------------------------------------------------------------//
@@ -217,8 +217,8 @@ int main(int argc, char** argv) {
     FieldAux estructAuxUtilizadores[] = {
         {.fieldName = "id_utilizador", .alias = "Numero Utilizador", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
         {.fieldName = "id_tipo_utilizador_utilizador", .alias = "Numero tipo utilizador", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
-        {.fieldName = "nome", .alias = "Nome", . sizeBytes = LONG_STRING, .type = CHAR},
-        {.fieldName = "password", .alias = "Password", . sizeBytes = LONG_STRING, .type = CHAR}
+        {.fieldName = "nome", .alias = "Nome", . sizeBytes = LONG_STRING, .type = STRING},
+        {.fieldName = "password", .alias = "Password", . sizeBytes = LONG_STRING, .type = STRING}
     };
 
     Utilizador utilizadores[20];
@@ -238,12 +238,17 @@ int main(int argc, char** argv) {
     int y[] = {ID_CATEGORIA_PERGUNTAS};
 
     Class arrayClass[] = {perguntaClass, categoriaClass, respostaClass, dificuldadeClass, ajudaClass, jogadaClass, jogoClass, tipoUtilizadorClass, tipoRespostaClass, utilizadorClass};
-    menu(arrayClass);
+    //menu(arrayClass);
     
     //---------------------------------------------------------------------------------------------------------------//
-
+    listarUtilizadores(utilizadorClass);
+    inserirUtilizador(utilizadorClass);
+    //listarTipoUtilizadores(tipoUtilizadorClass);
+   // inserirTipoUtilizador(tipoUtilizadorClass);
     //inserirPergunta(perguntaClass);
     //listarPerguntas(perguntaClass);
+    //inserirDificuldade(dificuldadeClass);
+    //listarDificuldades(dificuldadeClass);
     //inserirResposta(respostaClass);
     //listarRespostas(respostaClass);
     //listarPergunta(perguntaClass,0);

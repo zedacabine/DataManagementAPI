@@ -2,15 +2,15 @@
 #include "TipoUtilizador.h"
 #include <string.h>
 
-void inserirtipoUtilizador(Class tipoUtilizadorClass) {
+void inserirTipoUtilizador(Class tipoUtilizadorClass) {
 
     create(tipoUtilizadorClass.StructTypeSize, tipoUtilizadorClass.data, tipoUtilizadorClass.elements, tipoUtilizadorClass.auxStruct, tipoUtilizadorClass.fieldsNumber);
      char NomeFicheiro[SHORT_STRING];
-    strcpy(NomeFicheiro, "tipoUtilizadors.txt");
+    strcpy(NomeFicheiro, "tipoUtilizadores.txt");
     writeFile(NomeFicheiro, tipoUtilizadorClass);
 }
 
-void listartipoUtilizadors(Class tipoUtilizadorClass) {
+void listarTipoUtilizadores(Class tipoUtilizadorClass) {
 
     fullList(tipoUtilizadorClass.data, tipoUtilizadorClass.StructTypeSize, (*tipoUtilizadorClass.elements), tipoUtilizadorClass.auxStruct, tipoUtilizadorClass.fieldsNumber);
 

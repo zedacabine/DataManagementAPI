@@ -57,6 +57,7 @@ extern "C" {
 
     typedef struct {
         char name[20];
+        unsigned short primaryKeyField;
         void *data;
         unsigned int StructTypeSize;
         void *auxStruct;
