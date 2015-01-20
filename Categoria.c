@@ -2,17 +2,17 @@
 #include "Categoria.h"
 #include <string.h>
 
-void inserirCategoria(Class categoriaClass) {
+void inserirCategoria(Class *categoriaClass) {
 
-    create(categoriaClass.StructTypeSize, categoriaClass.data, categoriaClass.elements, categoriaClass.auxStruct, categoriaClass.fieldsNumber);
+    create(categoriaClass->StructTypeSize, categoriaClass->data, categoriaClass->elements, categoriaClass->auxStruct, categoriaClass->fieldsNumber);
     char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "categorias.txt");
     writeFile(NomeFicheiro, categoriaClass);
 }
 
-void listarCategorias(Class categoriaClass) {
+void listarCategorias(Class *categoriaClass) {
 
-    fullList(categoriaClass.data, categoriaClass.StructTypeSize, (*categoriaClass.elements), categoriaClass.auxStruct, categoriaClass.fieldsNumber);
+    fullList(categoriaClass->data, categoriaClass->StructTypeSize, (*categoriaClass->elements), categoriaClass->auxStruct, categoriaClass->fieldsNumber);
 
 }
 

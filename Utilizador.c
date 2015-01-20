@@ -2,17 +2,17 @@
 #include "Utilizador.h"
 #include <string.h>
 
-void inserirUtilizador(Class utilizadorClass) {
+void inserirUtilizador(Class *utilizadorClass) {
 
-    create(utilizadorClass.StructTypeSize, utilizadorClass.data, utilizadorClass.elements, utilizadorClass.auxStruct, utilizadorClass.fieldsNumber);
+    create(utilizadorClass->StructTypeSize, utilizadorClass->data, utilizadorClass->elements, utilizadorClass->auxStruct, utilizadorClass->fieldsNumber);
      char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "utilizadores.txt");
     writeFile(NomeFicheiro, utilizadorClass);
 }
 
-void listarUtilizadores(Class utilizadorClass) {
+void listarUtilizadores(Class *utilizadorClass) {
 
-    fullList(utilizadorClass.data, utilizadorClass.StructTypeSize, (*utilizadorClass.elements), utilizadorClass.auxStruct, utilizadorClass.fieldsNumber);
+    fullList(utilizadorClass->data, utilizadorClass->StructTypeSize, (*utilizadorClass->elements), utilizadorClass->auxStruct, utilizadorClass->fieldsNumber);
 
 }
 

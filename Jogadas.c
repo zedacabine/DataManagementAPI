@@ -2,18 +2,18 @@
 #include "Jogadas.h"
 #include <string.h>
 
-void inserirJogada(Class jogadaClass) {
+void inserirJogada(Class *jogadaClass) {
 
-    create(jogadaClass.StructTypeSize, jogadaClass.data, jogadaClass.elements, jogadaClass.auxStruct, jogadaClass.fieldsNumber);
+    create(jogadaClass->StructTypeSize, jogadaClass->data, jogadaClass->elements, jogadaClass->auxStruct, jogadaClass->fieldsNumber);
      char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "jogadas.txt");
     writeFile(NomeFicheiro, jogadaClass);
 }
 
-void listarJogadas(Class jogadaClass) {
+void listarJogadas(Class *jogadaClass) {
 
-    fullList(jogadaClass.data, jogadaClass.StructTypeSize, (*jogadaClass.elements), jogadaClass.auxStruct, jogadaClass.fieldsNumber);
-
+    fullList(jogadaClass->data, jogadaClass->StructTypeSize, (*jogadaClass->elements), jogadaClass->auxStruct, jogadaClass->fieldsNumber);
+    
 }
 
 void listarJogada(Class jogadaClass, const unsigned int chave) {

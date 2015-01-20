@@ -3,9 +3,8 @@
 #include <string.h>
 
 void inserirTipoUtilizador(Class tipoUtilizadorClass) {
-
     create(tipoUtilizadorClass.StructTypeSize, tipoUtilizadorClass.data, tipoUtilizadorClass.elements, tipoUtilizadorClass.auxStruct, tipoUtilizadorClass.fieldsNumber);
-     char NomeFicheiro[SHORT_STRING];
+    char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "tipoUtilizadores.txt");
     writeFile(NomeFicheiro, tipoUtilizadorClass);
 }

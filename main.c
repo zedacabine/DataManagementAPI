@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 
     FieldAux estructAuxCategorias[] = {
         {.fieldName = "id_categoria", .alias = "Numero Categoria", .sizeBytes = INT_SIZE, .type = INT, .unique = true, .required = true, .autoIncrement = true},
-        {.fieldName = "categoria", .alias = "Categoria", .sizeBytes = LONG_STRING, .type = STRING, .required = true},
+        {.fieldName = "categoria", .alias = "Categoria", .sizeBytes = SHORT_STRING, .type = STRING, .required = true},
         {.fieldName = "pontuacao_categoria", .alias = "Pontuacao", .sizeBytes = INT_SIZE, .type = INT, .required = true}
     };
 
@@ -56,8 +56,8 @@ int main(int argc, char** argv) {
     Class categoriaClass = {.name = "Categoria", .StructTypeSize = tamTipoCategoria, .data = categorias, .auxStruct = estructAuxCategorias, .elements = &contadorCategorias, .fieldsNumber = tamAuxCategoria, .aliasField = CATEGORIA};
 
     strcpy(NomeFicheiro, "categorias.txt");
-    readFile(NomeFicheiro, categoriaClass, MAX_CATEGORIA);
-
+    //readFile(NomeFicheiro, categoriaClass, MAX_CATEGORIA);
+    readFile(NomeFicheiro, &categoriaClass, MAX_CATEGORIA);
 
     //---------------------------------------------------------------------------------------------------------------//
 
@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     Class respostaClass = {.name = "Resposta", .StructTypeSize = tamTipoResposta, .data = respostas, .auxStruct = estructAuxRespostas, .elements = &contadorRespostas, .fieldsNumber = tamAuxResposta, .aliasField = RESPOSTA};
 
     strcpy(NomeFicheiro, "respostas.txt");
-    readFile(NomeFicheiro, respostaClass, MAX_RESPOSTA);
+    readFile(NomeFicheiro, &respostaClass, MAX_RESPOSTA);
 
     //---------------------------------------------------------------------------------------------------------------//
 
@@ -83,6 +83,7 @@ int main(int argc, char** argv) {
         {.fieldName = "id_dificuldade", .alias = "Numero Dificuldade", .sizeBytes = INT_SIZE, . type = INT, . unique = true},
         {.fieldName = "dificuldade", .alias = "Dificuldade", .sizeBytes = INT_SIZE, .type = STRING, . required = true},
         {.fieldName = "pontuacao_dificuldade", .alias = "Pontuacao", .sizeBytes = INT_SIZE, .type = INT, .required = true}
+
     };
 
     Dificuldade dificuldades[MAX_DIFICULDADE];
@@ -93,7 +94,7 @@ int main(int argc, char** argv) {
     Class dificuldadeClass = {.name = "Dificuldade", .StructTypeSize = tamTipoDificuldade, .data = dificuldades, .auxStruct = estructAuxDificuldades, .elements = &contadorDificuldades, .fieldsNumber = tamAuxDificuldade, .aliasField = DIFICULDADE};
 
     strcpy(NomeFicheiro, "dificuldades.txt");
-    readFile(NomeFicheiro, dificuldadeClass, MAX_DIFICULDADE);
+    readFile(NomeFicheiro, &dificuldadeClass, MAX_DIFICULDADE);
 
 
     //---------------------------------------------------------------------------------------------------------------//
@@ -116,7 +117,7 @@ int main(int argc, char** argv) {
     Class perguntaClass = {.name = "Pergunta", .StructTypeSize = tamTipoPergunta, .data = perguntas, .auxStruct = estructAuxPerguntas, .elements = &contadorPerguntas, .fieldsNumber = tamAuxPergunta, .aliasField = PERGUNTA};
 
     strcpy(NomeFicheiro, "perguntas.txt");
-    readFile(NomeFicheiro, perguntaClass, MAX_PERGUNTA);
+    readFile(NomeFicheiro, &perguntaClass, MAX_PERGUNTA);
 
 
 
@@ -135,7 +136,7 @@ int main(int argc, char** argv) {
     Class ajudaClass = {.name = "Ajuda", .StructTypeSize = tamTipoAjuda, .data = ajudas, .auxStruct = estructAuxAjudas, .elements = &contadorAjudas, .fieldsNumber = tamAuxAjuda, .aliasField = AJUDA};
 
     strcpy(NomeFicheiro, "ajudas.txt");
-    readFile(NomeFicheiro, ajudaClass, MAX_AJUDA);
+    readFile(NomeFicheiro, &ajudaClass, MAX_AJUDA);
 
 
     //---------------------------------------------------------------------------------------------------------------//
@@ -158,7 +159,7 @@ int main(int argc, char** argv) {
     Class jogadaClass = {.name = "Jogada", .StructTypeSize = tamTipoJogada, .data = jogadas, .auxStruct = estructAuxJogadas, .elements = &contadorJogadas, .fieldsNumber = tamAuxJogada, .aliasField = PONTUACAO};
 
     strcpy(NomeFicheiro, "jogadas.txt");
-    readFile(NomeFicheiro, jogadaClass, MAX_JOGADA);
+    readFile(NomeFicheiro, &jogadaClass, MAX_JOGADA);
 
 
     //---------------------------------------------------------------------------------------------------------------//
@@ -175,16 +176,16 @@ int main(int argc, char** argv) {
     Class jogoClass = {.name = "Jogo", .StructTypeSize = tamTipoJogo, .data = jogos, .auxStruct = estructAuxJogos, .elements = &contadorJogos, .fieldsNumber = tamAuxJogo};
 
     strcpy(NomeFicheiro, "jogos.txt");
-    readFile(NomeFicheiro, jogoClass, MAX_JOGO);
+    readFile(NomeFicheiro, &jogoClass, MAX_JOGO);
     //---------------------------------------------------------------------------------------------------------------//
 
     FieldAux estructAuxTipoRespostas[] = {
         {.fieldName = "id_tipo_resposta", .alias = "Numero Tipo Resposta", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
-        {.fieldName = "Tipo Resposta", .alias = "Tipo Resposta", .sizeBytes = LONG_STRING, .type = STRING},
-        {.fieldName = "id_resposta_tipo_resposta", .alias = "Numero resposta", .sizeBytes = BOOL_SIZE, .type = BOOL, .unique = true}
+        {.fieldName = "tipo_resposta", .alias = "Tipo Resposta", .sizeBytes = SHORT_STRING, .type = STRING},
+        {.fieldName = "id_resposta_tipo_resposta", .alias = "Numero resposta", .sizeBytes = INT_SIZE, .type = INT, .unique = true}
     };
 
-    TipoResposta tipoRespostas[100];
+    TipoResposta tipoRespostas[MAX_TIPO_RESPOSTA];
     const unsigned int tamAuxTipoResposta = (sizeof (estructAuxTipoRespostas) / sizeof (estructAuxTipoRespostas[0]));
     const unsigned int tamTipoTipoResposta = sizeof (TipoResposta);
     const unsigned int tamArrayTipoResposta = (sizeof (tipoRespostas) / sizeof (estructAuxTipoRespostas[0]));
@@ -192,7 +193,7 @@ int main(int argc, char** argv) {
     Class tipoRespostaClass = {.name = "Tipo Resposta", .StructTypeSize = tamTipoTipoResposta, .data = tipoRespostas, .auxStruct = estructAuxTipoRespostas, .elements = &contadorTipoResposta, .fieldsNumber = tamAuxTipoResposta, .aliasField = TIPO_RESPOSTA};
 
     strcpy(NomeFicheiro, "tiporespostas.txt");
-    readFile(NomeFicheiro, tipoRespostaClass, MAX_TIPO_RESPOSTA);
+    readFile(NomeFicheiro, &tipoRespostaClass, MAX_TIPO_RESPOSTA);
 
 
     //---------------------------------------------------------------------------------------------------------------//
@@ -202,7 +203,7 @@ int main(int argc, char** argv) {
         {.fieldName = "tipo_utilizador", .alias = "Tipo Utilizador", .sizeBytes = MEDIUM_STRING, .type = STRING}
     };
 
-    TipoUtilizador tipoUtilizadores[2];
+    TipoUtilizador tipoUtilizadores[MAX_TIPO_UTILIZADOR];
     const unsigned int tamAuxTipoUtilizador = (sizeof (estructAuxTipoUtilizadores) / sizeof (estructAuxTipoUtilizadores[0]));
     const unsigned int tamTipoTipoUtilizador = sizeof (TipoUtilizador);
     const unsigned int tamArrayTipoUtilizador = (sizeof (tipoUtilizadores) / sizeof (estructAuxTipoUtilizadores[0]));
@@ -210,18 +211,18 @@ int main(int argc, char** argv) {
     Class tipoUtilizadorClass = {.name = "Tipo Utilizador", .StructTypeSize = tamTipoTipoUtilizador, .data = tipoUtilizadores, .auxStruct = estructAuxTipoUtilizadores, .elements = &contadorTipoUtilizadores, .fieldsNumber = tamAuxTipoUtilizador, .aliasField = DIFICULDADE};
 
     strcpy(NomeFicheiro, "tipoUtilizadores.txt");
-    readFile(NomeFicheiro, tipoUtilizadorClass, MAX_TIPO_UTILIZADOR);
+    readFile(NomeFicheiro, &tipoUtilizadorClass, MAX_TIPO_UTILIZADOR);
 
     //---------------------------------------------------------------------------------------------------------------//
 
     FieldAux estructAuxUtilizadores[] = {
         {.fieldName = "id_utilizador", .alias = "Numero Utilizador", .sizeBytes = INT_SIZE, .type = INT, .unique = true, .required = true},
         {.fieldName = "id_tipo_utilizador_utilizador", .alias = "Numero tipo utilizador", .sizeBytes = INT_SIZE, .type = INT, .required = true, .unique = true},
-        {.fieldName = "nome", .alias = "Nome", . sizeBytes = LONG_STRING, .type = STRING, .required = true},
-        {.fieldName = "password", .alias = "Password", . sizeBytes = LONG_STRING, .type = STRING}
+        {.fieldName = "nome", .alias = "Nome", . sizeBytes = MEDIUM_STRING, .type = STRING, .required = true},
+        {.fieldName = "password", .alias = "Password", . sizeBytes = MEDIUM_STRING, .type = STRING, .required = true}
     };
 
-    Utilizador utilizadores[20];
+    Utilizador utilizadores[MAX_UTILIZADOR];
     const unsigned int tamAuxUtilizador = (sizeof (estructAuxUtilizadores) / sizeof (estructAuxUtilizadores[0]));
     const unsigned int tamTipoUtilizador = sizeof (Utilizador);
     const unsigned int tamArrayUtilizador = (sizeof (utilizadores) / sizeof (estructAuxUtilizadores[0]));
@@ -229,7 +230,7 @@ int main(int argc, char** argv) {
     Class utilizadorClass = {.name = "Utilizador", .StructTypeSize = tamTipoUtilizador, .data = utilizadores, .auxStruct = estructAuxUtilizadores, .elements = &contadorUtilizadores, .fieldsNumber = tamAuxUtilizador, .aliasField = NOME};
 
     strcpy(NomeFicheiro, "utilizadores.txt");
-    readFile(NomeFicheiro, utilizadorClass, MAX_UTILIZADOR);
+    readFile(NomeFicheiro, &utilizadorClass, MAX_UTILIZADOR);
 
 
     //---------------------------------------------------------------------------------------------------------------//
@@ -237,8 +238,25 @@ int main(int argc, char** argv) {
     int x[] = {0, 1};
     int y[] = {ID_CATEGORIA_PERGUNTAS};
 
-    Class arrayClass[] = {perguntaClass, categoriaClass, respostaClass, dificuldadeClass, ajudaClass, jogadaClass, jogoClass, tipoUtilizadorClass, tipoRespostaClass, utilizadorClass};
-    //menu(arrayClass);
+    void *lista[] = {};
+    
+    void *arrayClass[10];
+    arrayClass[0]=&perguntaClass; 
+    arrayClass[1]=&categoriaClass;
+    arrayClass[2]=&respostaClass;
+    arrayClass[3]=&dificuldadeClass;
+    arrayClass[4]=&ajudaClass;
+    arrayClass[5]=&jogadaClass;
+    arrayClass[6]=&jogoClass;
+    arrayClass[7]=&tipoUtilizadorClass;
+    arrayClass[8]=&tipoRespostaClass;
+    arrayClass[9]=&utilizadorClass;
+
+    //login(arrayClass, utilizadorClass);
+
+    menu_admin(arrayClass);
+
+
 
     //---------------------------------------------------------------------------------------------------------------//
     //listarUtilizadores(utilizadorClass);
@@ -247,22 +265,27 @@ int main(int argc, char** argv) {
     // inserirTipoUtilizador(tipoUtilizadorClass);
     //inserirCategoria(categoriaClass);
     //listarCategorias(categoriaClass);
-    inserirPergunta(perguntaClass);
+    //inserirPergunta(perguntaClass);
     //listarPerguntas(perguntaClass);
     //inserirDificuldade(dificuldadeClass);
     //listarDificuldades(dificuldadeClass);
     //inserirResposta(respostaClass);
     //listarRespostas(respostaClass);
-    //listarPergunta(perguntaClass,0);
+    //listarUtilizador(utilizadorClass,0);
     //filtrarPergunta(perguntaClass,contador-1,y,1);
-    //pesquisarPerguntas(perguntaClass,ID_PERGUNTA,1);
-    //int i = 1;
+    //squisarPerguntas(perguntaClass, ID_CATEGORIA_PERGUNTAS, &i, &counter, sinal);
+    //teste = ppesquisarPerguntas(perguntaClass,ID_PERGUNTA,1);
+    // char pes[20];
+    //strcpy(pes, "")
     //int *teste;
     //int counter;
     //char sinal[2 + 1];
-    // strcpy(sinal, "==");
+    //strcpy(sinal, "==");
+    //teste = pesquisarCategorias(categoriaClass, CATEGORIA, &i, &counter, sinal);
+    //printInt(&counter);
+
     //teste = pesquisarPerguntas(perguntaClass, ID_CATEGORIA_PERGUNTAS, &i, &counter, sinal);
-    //teste = pesquisarCategorias(categoriaClass, ID_CATEGORIA, &i, &counter, sinal);
+
     //filtrarCategorias(categoriaClass,teste, counter, y, 1);
     //filtrarPerguntas(perguntaClass, x, 1, y, 1);
 
@@ -270,10 +293,7 @@ int main(int argc, char** argv) {
 
     //for (i = 0; i < counter; i++) printf("%d\n", *(teste + i));
     //listarCategorias(categoriaClass);
-
-
     return 0;
-
 
     return (EXIT_SUCCESS);
 }

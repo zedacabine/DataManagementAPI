@@ -16,13 +16,13 @@ extern "C" {
     typedef struct {
         unsigned int id_tipo_resposta;
         char tipo_resposta[SHORT_STRING];
-        unsigned int id_resposta;
+        unsigned int id_resposta_tipo_resposta;
     } TipoResposta;
 
     enum CamposTipoResposta {
         ID_TIPO_RESPOSTA,
         TIPO_RESPOSTA,
-        ID_RESPOSTA_TIPO_REPOSTA
+        ID_RESPOSTA_TIPO_RESPOSTA
     };
 
 

@@ -2,16 +2,16 @@
 #include "Ajudas.h"
 #include <string.h>
 
-void inserirAjuda(Class ajudaClass) {
+void inserirAjuda(Class *ajudaClass) {
 
-    create(ajudaClass.StructTypeSize, ajudaClass.data, ajudaClass.elements, ajudaClass.auxStruct, ajudaClass.fieldsNumber);
+    create(ajudaClass->StructTypeSize, ajudaClass->data, ajudaClass->elements, ajudaClass->auxStruct, ajudaClass->fieldsNumber);
     char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "ajudas.txt");
     writeFile(NomeFicheiro, ajudaClass);
 }
 
-void listarAjudas(Class ajudaClass) {
-    fullList(ajudaClass.data, ajudaClass.StructTypeSize, (*ajudaClass.elements), ajudaClass.auxStruct, ajudaClass.fieldsNumber);
+void listarAjudas(Class *ajudaClass) {
+    fullList(ajudaClass->data, ajudaClass->StructTypeSize, (*ajudaClass->elements), ajudaClass->auxStruct, ajudaClass->fieldsNumber);
 }
 
 void listarAjuda(Class ajudaClass, const unsigned int chave) {

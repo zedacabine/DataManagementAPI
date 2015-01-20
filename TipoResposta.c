@@ -2,17 +2,17 @@
 #include "TipoResposta.h"
 #include <string.h>
 
-void inserirTipoResposta(Class tipoRespostaClass) {
+void inserirTipoResposta(Class *tipoRespostaClass) {
 
-    create(tipoRespostaClass.StructTypeSize, tipoRespostaClass.data, tipoRespostaClass.elements, tipoRespostaClass.auxStruct, tipoRespostaClass.fieldsNumber);
+    create(tipoRespostaClass->StructTypeSize, tipoRespostaClass->data, tipoRespostaClass->elements, tipoRespostaClass->auxStruct, tipoRespostaClass->fieldsNumber);
      char NomeFicheiro[SHORT_STRING];
-    strcpy(NomeFicheiro, "tipoRespostas.txt");
+    strcpy(NomeFicheiro, "tiporespostas.txt");
     writeFile(NomeFicheiro, tipoRespostaClass);
 }
 
-void listarTipoRespostas(Class tipoRespostaClass) {
+void listarTipoRespostas(Class *tipoRespostaClass) {
 
-    fullList(tipoRespostaClass.data, tipoRespostaClass.StructTypeSize, (*tipoRespostaClass.elements), tipoRespostaClass.auxStruct, tipoRespostaClass.fieldsNumber);
+    fullList(tipoRespostaClass->data, tipoRespostaClass->StructTypeSize, (*tipoRespostaClass->elements), tipoRespostaClass->auxStruct, tipoRespostaClass->fieldsNumber);
 
 }
 

@@ -20,7 +20,7 @@ extern "C" {
         unsigned int pontuacao_categoria;
     } Categoria;
 
-    enum CamposCatergoria {
+    enum CamposCategoria {
         ID_CATEGORIA,
         CATEGORIA,
         PONTUACAO_CATEGORIA

@@ -2,16 +2,16 @@
 #include "Pergunta.h"
 #include <string.h>
 
-void inserirPergunta(Class perguntaClass) {
+void inserirPergunta(Class *perguntaClass) {
 
-    create(perguntaClass.StructTypeSize, perguntaClass.data, perguntaClass.elements, perguntaClass.auxStruct, perguntaClass.fieldsNumber);
+    create(perguntaClass->StructTypeSize, perguntaClass->data, perguntaClass->elements, perguntaClass->auxStruct, perguntaClass->fieldsNumber);
     char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "perguntas.txt");
     writeFile(NomeFicheiro, perguntaClass);
 }
 
-void listarPerguntas(Class perguntaClass) {
-    fullList(perguntaClass.data, perguntaClass.StructTypeSize, (*perguntaClass.elements), perguntaClass.auxStruct, perguntaClass.fieldsNumber);
+void listarPerguntas(Class *perguntaClass) {
+    fullList(perguntaClass->data, perguntaClass->StructTypeSize, (*perguntaClass->elements), perguntaClass->auxStruct, perguntaClass->fieldsNumber);
 }
 
 void listarPergunta(Class perguntaClass, const unsigned int chave) {

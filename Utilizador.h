@@ -18,7 +18,7 @@ extern "C" {
         unsigned int id_utilizador;
         unsigned int id_tipo_utilizador;
         char nome[MEDIUM_STRING];
-        char password[SHORT_STRING];
+        char password[MEDIUM_STRING];
     } Utilizador;
 
     enum CamposUtilizador {

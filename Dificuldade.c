@@ -2,16 +2,16 @@
 #include "Dificuldade.h"
 #include <string.h>
 
-void inserirDificuldade(Class dificuldadeClass) {
-    create(dificuldadeClass.StructTypeSize, dificuldadeClass.data, dificuldadeClass.elements, dificuldadeClass.auxStruct, dificuldadeClass.fieldsNumber);
+void inserirDificuldade(Class *dificuldadeClass) {
+    create(dificuldadeClass->StructTypeSize, dificuldadeClass->data, dificuldadeClass->elements, dificuldadeClass->auxStruct, dificuldadeClass->fieldsNumber);
     char NomeFicheiro[SHORT_STRING];
     strcpy(NomeFicheiro, "dificuldades.txt");
     writeFile(NomeFicheiro, dificuldadeClass);
 }
 
-void listarDificuldades(Class dificuldadeClass) {
+void listarDificuldades(Class *dificuldadeClass) {
 
-    fullList(dificuldadeClass.data, dificuldadeClass.StructTypeSize, (*dificuldadeClass.elements), dificuldadeClass.auxStruct, dificuldadeClass.fieldsNumber);
+    fullList(dificuldadeClass->data, dificuldadeClass->StructTypeSize, (*dificuldadeClass->elements), dificuldadeClass->auxStruct, dificuldadeClass->fieldsNumber);
 
 }
 
