@@ -319,8 +319,6 @@ void listRegistry(void * reg, FieldAux *aux, unsigned field) {
         reg = reg + aux[i].sizeBytes;
     }
     DataType type = aux[i].type;
-
-
     if (aux[i].foreignKey == true) {
         unsigned int resultNumber;
         char signal[2 + 1];
@@ -328,16 +326,21 @@ void listRegistry(void * reg, FieldAux *aux, unsigned field) {
         int *result;
         result = search(aux[i].parentPrimaryKey, reg, aux[i].parentClass->data, aux[i].parentClass->auxStruct, *(aux[i].parentClass->elements), aux[i].parentClass->StructTypeSize, aux[i].type, &resultNumber, signal);
         //listRegistry(reg,aux[i].parentClass->auxStruct,aux[i].parentClass->aliasField);
-        int key[1];
-        int field[1];
-        key[0] = *(result + 0);
-        field[0] = aux[i].parentClass->aliasField;
-        parsedList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, aux[i].parentClass->auxStruct, key, resultNumber, field, 1);
-        //?? nao da nao sei porque
-        //singleParsedList(aux[i].parentClass,*(result + 0),field,1);
+        if (*(result + 0) != NO_VALUE) {
+            int field[1];
+            field[0] = aux[i].parentClass->aliasField;
+            parsedList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, aux[i].parentClass->auxStruct, result, resultNumber, field, 1);
+            //?? nao da nao sei porque
+            //singleParsedList(aux[i].parentClass,*(result + 0),field,1);
+        } else {
+            FieldAux *parentAux;
+            parentAux = aux[i].parentClass->auxStruct;
+            printf("No value found on Parent class %s primary key field %s \n", aux[i].parentClass->name, parentAux[aux[i].parentPrimaryKey]);
+        }
     } else if (aux[i].foreignKey != true) {
-        printString(aux[i].alias);
-        print(type, reg);
+        if (reg != NULL) {
+            print(type, reg);
+        } else puts("No Value");
     }
     puts("");
 
@@ -352,7 +355,12 @@ void listRegistry(void * reg, FieldAux *aux, unsigned field) {
 void fullList(void *list, const unsigned short structTypeSize, const unsigned int listSize, FieldAux *aux, const unsigned int fieldsNumber) {
     unsigned int i = 0, j = 0;
     for (i = 0; i < listSize; i++) {
+        puts("---------------------------------------------");
         for (j = 0; j < fieldsNumber; j++) {
+
+            if (aux[j].foreignKey != true) {
+                printString(aux[j].alias);
+            }
             listRegistry(list + (structTypeSize * i), aux, j);
         }
         puts("---------------------------------------------");
@@ -373,6 +381,9 @@ void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, 
     unsigned int i = 0, j = 0;
     for (i = 0; i < elementsNumber; i++) {
         for (j = 0; j < fieldsNumber; j++) {
+            if (aux[j].foreignKey != true) {
+                printString(aux[j].alias);
+            }
             listRegistry(list + (structTypeSize * elements[i]), aux, fields[j]);
         }
         //puts("---------------------------------------------");
@@ -457,31 +468,31 @@ void read(DataType type, void * field, const unsigned int maxSize) {
  * @param field
  */
 void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) {
-    unsigned i,j;
+    unsigned i, j;
     for (i = 0; i < field; ++i) {
         reg = reg + aux[i].sizeBytes;
     }
     DataType type = aux[i].type;
-    
+
     if (aux[i].foreignKey == true) {
-        unsigned int resultNumber;
-        char signal[2 + 1];
-        strcpy(signal, "==");
-        int *result;
-        result = search(aux[i].parentPrimaryKey, reg, aux[i].parentClass->data, aux[i].parentClass->auxStruct, *(aux[i].parentClass->elements), aux[i].parentClass->StructTypeSize, aux[i].type, &resultNumber, signal);
-        //listRegistry(reg,aux[i].parentClass->auxStruct,aux[i].parentClass->aliasField);
-        int key[100];
-        int field[1];
-        for(j=0;j<resultNumber;j++){
-            key[j]= *(result + j);
-        }
-        field[0] = aux[i].parentClass->aliasField;
-        parsedList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, aux[i].parentClass->auxStruct, key, resultNumber, field, aux[i].parentClass->fieldsNumber);
+        puts("__________________________________________________________________________");
+        printString(aux[i].parentClass->name);
+        puts("__________________________________________________________________________");
+        fullList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, *(aux[i].parentClass->elements), aux[i].parentClass->auxStruct, aux[i].parentClass->fieldsNumber);
+        puts("__________________________________________________________________________");
+
     }
-    
-    printString(aux[i].alias);
-    read(type, reg, aux[i].maxSize);
-    puts("");
+    if (aux[i].required == true) {
+        do {
+            printString(aux[i].alias);
+            read(type, reg, aux[i].maxSize);
+            puts("");
+        } while (reg == NULL);
+    } else {
+        printString(aux[i].alias);
+        read(type, reg, aux[i].maxSize);
+        puts("");
+    }
 }
 
 /**

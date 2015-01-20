@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     //menu();
     char NomeFicheiro[SHORT_STRING];
 
-    unsigned int contador, contadorPerguntas, contadorCategorias, contadorRespostas, contadorTipoUtilizadores, contadorAjudas, contadorDificuldades, contadorTipoResposta, contadorJogadas, contadorJogos,contadorUtilizadores;
+    unsigned int contador, contadorPerguntas, contadorCategorias, contadorRespostas, contadorTipoUtilizadores, contadorAjudas, contadorDificuldades, contadorTipoResposta, contadorJogadas, contadorJogos, contadorUtilizadores;
 
     //---------------------------------------------------------------------------------------------------------------//
 
@@ -215,9 +215,9 @@ int main(int argc, char** argv) {
     //---------------------------------------------------------------------------------------------------------------//
 
     FieldAux estructAuxUtilizadores[] = {
-        {.fieldName = "id_utilizador", .alias = "Numero Utilizador", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
-        {.fieldName = "id_tipo_utilizador_utilizador", .alias = "Numero tipo utilizador", .sizeBytes = INT_SIZE, .type = INT, .unique = true},
-        {.fieldName = "nome", .alias = "Nome", . sizeBytes = LONG_STRING, .type = STRING},
+        {.fieldName = "id_utilizador", .alias = "Numero Utilizador", .sizeBytes = INT_SIZE, .type = INT, .unique = true, .required = true},
+        {.fieldName = "id_tipo_utilizador_utilizador", .alias = "Numero tipo utilizador", .sizeBytes = INT_SIZE, .type = INT, .required = true, .unique = true},
+        {.fieldName = "nome", .alias = "Nome", . sizeBytes = LONG_STRING, .type = STRING, .required = true},
         {.fieldName = "password", .alias = "Password", . sizeBytes = LONG_STRING, .type = STRING}
     };
 
@@ -228,7 +228,7 @@ int main(int argc, char** argv) {
 
     Class utilizadorClass = {.name = "Utilizador", .StructTypeSize = tamTipoUtilizador, .data = utilizadores, .auxStruct = estructAuxUtilizadores, .elements = &contadorUtilizadores, .fieldsNumber = tamAuxUtilizador, .aliasField = NOME};
 
-    strcpy(NomeFicheiro, "utilizador.txt");
+    strcpy(NomeFicheiro, "utilizadores.txt");
     readFile(NomeFicheiro, utilizadorClass, MAX_UTILIZADOR);
 
 
@@ -239,13 +239,15 @@ int main(int argc, char** argv) {
 
     Class arrayClass[] = {perguntaClass, categoriaClass, respostaClass, dificuldadeClass, ajudaClass, jogadaClass, jogoClass, tipoUtilizadorClass, tipoRespostaClass, utilizadorClass};
     //menu(arrayClass);
-    
+
     //---------------------------------------------------------------------------------------------------------------//
-    listarUtilizadores(utilizadorClass);
-    inserirUtilizador(utilizadorClass);
+    //listarUtilizadores(utilizadorClass);
+    //inserirUtilizador(utilizadorClass);
     //listarTipoUtilizadores(tipoUtilizadorClass);
-   // inserirTipoUtilizador(tipoUtilizadorClass);
-    //inserirPergunta(perguntaClass);
+    // inserirTipoUtilizador(tipoUtilizadorClass);
+    //inserirCategoria(categoriaClass);
+    //listarCategorias(categoriaClass);
+    inserirPergunta(perguntaClass);
     //listarPerguntas(perguntaClass);
     //inserirDificuldade(dificuldadeClass);
     //listarDificuldades(dificuldadeClass);
