@@ -16,25 +16,25 @@ void listarRespostas(Class *respostaClass) {
 
 }
 
-void listarResposta(Class respostaClass, const unsigned int chave) {
+void listarResposta(Class *respostaClass, const unsigned int chave) {
 
     singleList(respostaClass, chave);
 }
 
-void filtrarRespostas(Class respostaClass, int *chaves, int numeroChaves, int *campos, int numeroCampos) {
+void filtrarRespostas(Class *respostaClass, int *chaves, int numeroChaves, int *campos, int numeroCampos) {
 
-    parsedList(respostaClass.data, respostaClass.StructTypeSize, respostaClass.auxStruct, chaves, numeroChaves, campos, numeroCampos);
+    parsedList(respostaClass->data, respostaClass->StructTypeSize, respostaClass->auxStruct, chaves, numeroChaves, campos, numeroCampos);
 }
 
-void filtrarResposta(Class respostaClass, int chave, int *campos, int numeroCampos) {
+void filtrarResposta(Class *respostaClass, int chave, int *campos, int numeroCampos) {
 
     singleParsedList(respostaClass, chave, campos, numeroCampos);
 }
 
-void pesquisarRespostas(Class respostaClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
-    FieldAux *aux = respostaClass.auxStruct;
+void pesquisarRespostas(Class *respostaClass,const unsigned int campo,void *valorPesquisar,unsigned int *numeroResultados,char *sinal){
+    FieldAux *aux = respostaClass->auxStruct;
     aux[campo].type;
-    search(campo, valorPesquisar,respostaClass.data,respostaClass.auxStruct,(*respostaClass.elements),respostaClass.StructTypeSize,aux[campo].type,numeroResultados,sinal) ;
+    search(campo, valorPesquisar,respostaClass->data,respostaClass->auxStruct,(*respostaClass->elements),respostaClass->StructTypeSize,aux[campo].type,numeroResultados,sinal) ;
 
     }
 
