@@ -303,10 +303,10 @@ int * search(const unsigned int field, void *searchValue, void * list, FieldAux 
  * @param fields
  * @param fieldsNumber
  */
-void singleParsedList(Class class, const unsigned int key, int *fields, unsigned fieldsNumber) {
+void singleParsedList(Class *class, const unsigned int key, int *fields, unsigned fieldsNumber) {
 
     int keys[] = {key};
-    parsedList(class.data, class.StructTypeSize, class.auxStruct, keys, 1, fields, fieldsNumber);
+    parsedList(class->data, class->StructTypeSize, class->auxStruct, keys, 1, fields, fieldsNumber);
 }
 
 /**
@@ -555,7 +555,7 @@ void parsedRead(RequestType rtype, const unsigned short structTypeSize, void *li
 
 void singleParsedRead(RequestType rtype, const unsigned short structTypeSize, void *list, FieldAux *aux, const unsigned int element, int *fields, unsigned fieldsNumber) {
     int elements[] = {element};
-    parsedList(list, structTypeSize, aux, elements, 1, fields, fieldsNumber);
+    parsedRead(rtype,structTypeSize,list,aux, elements, 1, fields, fieldsNumber);
 }
 
 /**
