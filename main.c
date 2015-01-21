@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
 
     FieldAux estructAuxDificuldades[] = {
         {.fieldName = "id_dificuldade", .alias = "Numero Dificuldade", .sizeBytes = INT_SIZE, . type = INT, . unique = true},
-        {.fieldName = "dificuldade", .alias = "Dificuldade", .sizeBytes = INT_SIZE, .type = STRING, . required = true},
+        {.fieldName = "dificuldade", .alias = "Dificuldade", .sizeBytes = SHORT_STRING, .type = STRING, . required = true},
         {.fieldName = "pontuacao_dificuldade", .alias = "Pontuacao", .sizeBytes = INT_SIZE, .type = INT, .required = true}
 
     };
@@ -239,22 +239,22 @@ int main(int argc, char** argv) {
     int y[] = {ID_CATEGORIA_PERGUNTAS};
 
     void *lista[] = {};
-    
+
     void *arrayClass[10];
-    arrayClass[0]=&perguntaClass; 
-    arrayClass[1]=&categoriaClass;
-    arrayClass[2]=&respostaClass;
-    arrayClass[3]=&dificuldadeClass;
-    arrayClass[4]=&ajudaClass;
-    arrayClass[5]=&jogadaClass;
-    arrayClass[6]=&jogoClass;
-    arrayClass[7]=&tipoUtilizadorClass;
-    arrayClass[8]=&tipoRespostaClass;
-    arrayClass[9]=&utilizadorClass;
+    arrayClass[0] = &perguntaClass;
+    arrayClass[1] = &categoriaClass;
+    arrayClass[2] = &respostaClass;
+    arrayClass[3] = &dificuldadeClass;
+    arrayClass[4] = &ajudaClass;
+    arrayClass[5] = &jogadaClass;
+    arrayClass[6] = &jogoClass;
+    arrayClass[7] = &tipoUtilizadorClass;
+    arrayClass[8] = &tipoRespostaClass;
+    arrayClass[9] = &utilizadorClass;
 
     //login(arrayClass, utilizadorClass);
 
-    menu_admin(arrayClass);
+    //menu_admin(arrayClass);
 
 
 
@@ -265,8 +265,27 @@ int main(int argc, char** argv) {
     // inserirTipoUtilizador(tipoUtilizadorClass);
     //inserirCategoria(categoriaClass);
     //listarCategorias(categoriaClass);
-    //inserirPergunta(perguntaClass);
-    //listarPerguntas(perguntaClass);
+
+    ///////////////////Perguntas\\\\\\\\\\\\\/
+    int camposEditarPergunta[2] = {ID_PERGUNTA,PERGUNTA};
+    int chaves[] = {0, 1, 2};
+    int valor = 1;
+    int numeroResultados;
+    char sinal[2 + 1];
+    strcpy(sinal, "==");
+    int * resultPesquisa;
+    resultPesquisa=pesquisarPerguntas(&perguntaClass, ID_DIFICULDADE, &valor, &numeroResultados, sinal);
+    //inserirPergunta(&perguntaClass);
+    //listarPerguntas(&perguntaClass);
+    //listarPergunta(&perguntaClass,0);
+    //filtrarPergunta(&perguntaClass,0,camposEditarPergunta,2);
+     filtrarPerguntas(&perguntaClass,resultPesquisa,numeroResultados,camposEditarPergunta,2);
+    //filtrarEditarPergunta(&perguntaClass, 0, camposEditarPergunta, 2);
+    //editarPergunta(&perguntaClass,1);
+    //editarPerguntas(&perguntaClass, chaves, 3);
+
+    ///////////////////////////////////////////
+
     //inserirDificuldade(dificuldadeClass);
     //listarDificuldades(dificuldadeClass);
     //inserirResposta(respostaClass);
