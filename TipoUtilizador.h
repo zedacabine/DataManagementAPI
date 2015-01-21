@@ -15,7 +15,7 @@ extern "C" {
 
 #define MAX_TIPO_UTILIZADOR 4
     typedef struct {
-        unsigned int id_utilizador;
+        unsigned int id_tipo_utilizador;
         char tipo_utilizador[MEDIUM_STRING];
     } TipoUtilizador;
 

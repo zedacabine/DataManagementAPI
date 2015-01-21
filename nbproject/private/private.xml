@@ -6,6 +6,20 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Resposta.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Resposta.h</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/DataManagement.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Pergunta.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Categoria.h</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/TipoResposta.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/TipoResposta.h</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Ajudas.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Categoria.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Dificuldade.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Jogadas.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/main.c</file>
+            <file>file:/home/aluno/NetBeansProjects/DataManagementAPI/Jogo.c</file>
+        </group>
     </open-files>
 </project-private>

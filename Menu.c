@@ -98,7 +98,7 @@ void gestaoPerguntas(void **arrayClass) {
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_perguntas(arrayClass);
                 break;
             case 4: listarPerguntas(arrayClass);
                 voltar();
@@ -130,13 +130,13 @@ void gestaoCategorias(void **arrayClass) {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: inserirCategoria(arrayClass);
+             case 1: inserirCategoria(arrayClass);
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_categorias(arrayClass);
                 break;
-            case 4: listarCategorias(arrayClass);
+            case 4: listarCategoria(arrayClass);
                 voltar();
                 break;
             case 5: printf("    1- Adicionar Perguntas     \n");
@@ -166,13 +166,13 @@ void gestaoRespostas(void **arrayClass) {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: inserirResposta(arrayClass);
+             case 1: inserirResposta(arrayClass);
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_respostas(arrayClass);
                 break;
-            case 4: listarRespostas(arrayClass);
+            case 4: listarResposta(arrayClass);
                 voltar();
                 break;
             case 5: printf("    1- Adicionar Perguntas     \n");
@@ -202,14 +202,13 @@ void gestaoTipoRespostas(void **arrayClass) {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: inserirTipoResposta(arrayClass);
+             case 1: inserirTipoResposta(arrayClass);
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_tipoTipoRespostas(arrayClass);
                 break;
-            case 4: listarTipoRespostas(arrayClass);
-                voltar();
+            case 4: listarTipoResposta(arrayClass);
                 break;
             case 5: printf("    1- Adicionar Perguntas     \n");
                 break;
@@ -242,7 +241,7 @@ void gestaoUtilizadores(void **arrayClass) {
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_utilizadores(arrayClass);
                 break;
             case 4: listarUtilizadores(arrayClass);
                 voltar();
@@ -273,11 +272,11 @@ void gestaoTipoUtilizadores(void **arrayClass) {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: inserirTipoUtilizador(arrayClass);
+             case 1: inserirTipoUtilizador(arrayClass);
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_tipoTipoUtilizadores(arrayClass);
                 break;
             case 4: listarTipoUtilizadores(arrayClass);
                 voltar();
@@ -307,13 +306,13 @@ void gestaoAjudas(void **arrayClass) {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: inserirAjuda(arrayClass);
+             case 1: inserirAjuda(arrayClass);
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_ajudas(arrayClass);
                 break;
-            case 4: listarAjudas(arrayClass);
+            case 4: listarAjuda(arrayClass);
                 voltar();
                 break;
             case 5: printf("    1- Adicionar Perguntas     \n");
@@ -341,11 +340,11 @@ void gestaoDificuldades(void **arrayClass) {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: inserirDificuldade(arrayClass);
+             case 1: inserirDificuldade(arrayClass);
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_dificuldades(arrayClass);
                 break;
             case 4: listarDificuldades(arrayClass);
                 voltar();
@@ -375,14 +374,13 @@ void gestaoJogadas(void **arrayClass) {
             scanf("%d", &opcao);
         } while (opcao < 0 || opcao > 6);
         switch (opcao) {
-            case 1: inserirJogada(arrayClass);
+             case 1: inserirJogada(arrayClass);
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3: listar_editar_jogadas(arrayClass);
                 break;
             case 4: listarJogadas(arrayClass);
-                voltar();
                 break;
             case 5: printf("    1- Adicionar Perguntas     \n");
                 break;
@@ -413,10 +411,10 @@ void gestaoJogo(void **arrayClass) {
                 break;
             case 2: printf("    1- Adicionar Perguntas     \n");
                 break;
-            case 3: printf("    1- Adicionar Perguntas     \n");
+            case 3:;
                 break;
-            case 4: listarJogos(arrayClass);
-                voltar();
+            case 4: listarJogo(arrayClass);
+                break;
                 break;
             case 5: printf("    1- Adicionar Perguntas     \n");
                 break;

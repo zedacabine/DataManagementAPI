@@ -385,8 +385,8 @@ void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, 
     unsigned int i = 0, j = 0;
     for (i = 0; i < elementsNumber; i++) {
         for (j = 0; j < fieldsNumber; j++) {
-            if (aux[j].foreignKey != true) {
-                printString(aux[j].alias);
+            if (aux[fields[j]].foreignKey != true) {
+                printString(aux[fields[j]].alias);
             }
             listRegistry(list + (structTypeSize * elements[i]), aux, fields[j]);
         }

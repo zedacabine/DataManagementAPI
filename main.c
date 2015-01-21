@@ -254,7 +254,7 @@ int main(int argc, char** argv) {
 
     //login(arrayClass, utilizadorClass);
 
-    //menu_admin(arrayClass);
+    menu_admin(arrayClass);
 
 
 
@@ -279,11 +279,11 @@ int main(int argc, char** argv) {
     //listarPerguntas(&perguntaClass);
     //listarPergunta(&perguntaClass,0);
     //filtrarPergunta(&perguntaClass,0,camposEditarPergunta,2);
-     filtrarPerguntas(&perguntaClass,resultPesquisa,numeroResultados,camposEditarPergunta,2);
+     //filtrarPerguntas(&perguntaClass,resultPesquisa,numeroResultados,camposEditarPergunta,2);
     //filtrarEditarPergunta(&perguntaClass, 0, camposEditarPergunta, 2);
     //editarPergunta(&perguntaClass,1);
     //editarPerguntas(&perguntaClass, chaves, 3);
-
+    //listar_editar_perguntas(&perguntaClass);
     ///////////////////////////////////////////
 
     //inserirDificuldade(dificuldadeClass);
