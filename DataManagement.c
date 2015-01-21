@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 /**
  * 
@@ -319,31 +321,33 @@ void listRegistry(void * reg, FieldAux *aux, unsigned field) {
         reg = reg + aux[i].sizeBytes;
     }
     DataType type = aux[i].type;
-    if (aux[i].foreignKey == true) {
-        unsigned int resultNumber;
-        char signal[2 + 1];
-        strcpy(signal, "==");
-        int *result;
-        result = search(aux[i].parentPrimaryKey, reg, aux[i].parentClass->data, aux[i].parentClass->auxStruct, *(aux[i].parentClass->elements), aux[i].parentClass->StructTypeSize, aux[i].type, &resultNumber, signal);
-        //listRegistry(reg,aux[i].parentClass->auxStruct,aux[i].parentClass->aliasField);
-        if (*(result + 0) != NO_VALUE) {
-            int field[1];
-            field[0] = aux[i].parentClass->aliasField;
-            parsedList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, aux[i].parentClass->auxStruct, result, resultNumber, field, 1);
-            //?? nao da nao sei porque
-            //singleParsedList(aux[i].parentClass,*(result + 0),field,1);
-        } else {
-            FieldAux *parentAux;
-            parentAux = aux[i].parentClass->auxStruct;
-            printf("No value found on Parent class %s primary key field %s \n", aux[i].parentClass->name, parentAux[aux[i].parentPrimaryKey]);
+    if (type != STRUCT) {
+        if (aux[i].foreignKey == true) {
+            unsigned int resultNumber;
+            char signal[2 + 1];
+            strcpy(signal, "==");
+            int *result;
+            result = search(aux[i].parentPrimaryKey, reg, aux[i].parentClass->data, aux[i].parentClass->auxStruct, *(aux[i].parentClass->elements), aux[i].parentClass->StructTypeSize, aux[i].type, &resultNumber, signal);
+            //listRegistry(reg,aux[i].parentClass->auxStruct,aux[i].parentClass->aliasField);
+            if (*(result + 0) != NO_VALUE) {
+                int field[1];
+                field[0] = aux[i].parentClass->aliasField;
+                parsedList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, aux[i].parentClass->auxStruct, result, resultNumber, field, 1);
+                //?? nao da nao sei porque
+                //singleParsedList(aux[i].parentClass,*(result + 0),field,1);
+            } else {
+                FieldAux *parentAux;
+                parentAux = aux[i].parentClass->auxStruct;
+                printf("No value found on Parent class %s primary key field %s \n", aux[i].parentClass->name, parentAux[aux[i].parentPrimaryKey]);
+            }
+        } else if (aux[i].foreignKey != true) {
+            if (reg != NULL) {
+                print(type, reg);
+            } else puts("No Value");
         }
-    } else if (aux[i].foreignKey != true) {
-        if (reg != NULL) {
-            print(type, reg);
-        } else puts("No Value");
-    }
-    puts("");
+        puts("");
 
+    }
 }
 
 /**
@@ -395,15 +399,15 @@ void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, 
  * @param perguntaClass
  * @param key
  */
-void singleList(Class class, const unsigned int key) {
+void singleList(Class *class, const unsigned int key) {
 
     int keys[] = {key};
-    int fields[class.fieldsNumber];
+    int fields[class->fieldsNumber];
     unsigned int i;
-    for (i = 0; i < class.fieldsNumber; i++) {
+    for (i = 0; i < class->fieldsNumber; i++) {
         fields[i] = i;
     }
-    parsedList(class.data, class.StructTypeSize, class.auxStruct, keys, 1, fields, class.fieldsNumber);
+    parsedList(class->data, class->StructTypeSize, class->auxStruct, keys, 1, fields, class->fieldsNumber);
 }
 
 /**
@@ -460,6 +464,20 @@ void read(DataType type, void * field, const unsigned int maxSize) {
     }
 }
 
+bool checkUniqueField(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType) {
+    if (aux[field].unique) {
+        unsigned int resultCounter;
+        char signal[2 + 1];
+        strcpy(signal, "==");
+        search(field, searchValue, list, aux, elementsNumber, structTypeSize, searchValueType, &resultCounter, signal);
+        if (resultCounter == 0) return false;
+        else return true;
+
+    } else {
+        puts("Field isn't unique");
+    }
+}
+
 /**
  * 
  * @param rtype
@@ -473,25 +491,40 @@ void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) 
         reg = reg + aux[i].sizeBytes;
     }
     DataType type = aux[i].type;
+    if (aux[i].type != STRUCT) {
+        if (aux[i].foreignKey == true) {
+            printString(aux[i].parentClass->name);
+            puts("1-List / 2-New");
+            unsigned int op;
+            readInt(&op);
+            if (op == 1) {
+                puts("");
+                puts("__________________________________________________________________________");
+                puts("__________________________________________________________________________");
+                // search(i,reg,aux[i].parentClass->data,aux[i].parentClass->auxStruct)
+                // parsedList(aux[i].parentClass->data,aux[1].parentClass->StructTypeSize,aux[i].parentClass->auxStruct,,aux[i].parentClass->elements,aux[1].parentClass->fieldsNumber)
+                fullList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, *(aux[i].parentClass->elements), aux[i].parentClass->auxStruct, aux[i].parentClass->fieldsNumber);
+                puts("__________________________________________________________________________");
+                puts("__________________________________________________________________________");
+                puts("");
+            } else if (op == 2) {
 
-    if (aux[i].foreignKey == true) {
-        puts("__________________________________________________________________________");
-        printString(aux[i].parentClass->name);
-        puts("__________________________________________________________________________");
-        fullList(aux[i].parentClass->data, aux[i].parentClass->StructTypeSize, *(aux[i].parentClass->elements), aux[i].parentClass->auxStruct, aux[i].parentClass->fieldsNumber);
-        puts("__________________________________________________________________________");
+                fullRead(CREATE, aux[i].parentClass->StructTypeSize, aux[i].parentClass->data, *(aux[i].parentClass->elements), aux[i].parentClass->auxStruct, aux[i].parentClass->fieldsNumber);
+            }
 
-    }
-    if (aux[i].required == true) {
-        do {
+        }
+        if (aux[i].required == true) {
+            do {
+                printString(aux[i].alias);
+                read(type, reg, aux[i].maxSize);
+                puts("");
+            } while (reg == NULL);
+
+        } else {
             printString(aux[i].alias);
             read(type, reg, aux[i].maxSize);
             puts("");
-        } while (reg == NULL);
-    } else {
-        printString(aux[i].alias);
-        read(type, reg, aux[i].maxSize);
-        puts("");
+        }
     }
 }
 
@@ -506,6 +539,8 @@ void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) 
  * @param fields
  * @param fieldsNumber
  */
+
+
 void parsedRead(RequestType rtype, const unsigned short structTypeSize, void *list, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber) {
 
     unsigned int i = 0, j = 0;
@@ -516,6 +551,11 @@ void parsedRead(RequestType rtype, const unsigned short structTypeSize, void *li
         puts("---------------------------------------------");
     }
 
+}
+
+void singleParsedRead(RequestType rtype, const unsigned short structTypeSize, void *list, FieldAux *aux, const unsigned int element, int *fields, unsigned fieldsNumber) {
+    int elements[] = {element};
+    parsedList(list, structTypeSize, aux, elements, 1, fields, fieldsNumber);
 }
 
 /**
@@ -618,6 +658,30 @@ int PesquisaBinaria(int vet[], int chave, int Tam) {
             inf = meio + 1;
     }
     return -1; // não encontrado
+}
+
+int * dele(int *counter, int *array, const unsigned int element) {
+    int j;
+    for (j = element; j<*counter - 1; j++) {
+        array[j] = array[j + 1];
+        //printf("%d", array[j]);
+    }
+    (*counter)--;
+    return array;
+}
+
+int * randomize(int *array, size_t n, int limit) {
+    if (n > 1) {
+        size_t i;
+        for (i = 0; i < n; i++) {
+            srand(time(0));
+            size_t j = i + rand() / (RAND_MAX / (limit - i) + 1);
+            int t = array[j];
+            array[j] = array[i];
+            array[i] = t;
+        }
+    }
+    return array;
 }
 
 
