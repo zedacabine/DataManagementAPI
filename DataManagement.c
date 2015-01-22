@@ -4,10 +4,18 @@
 #include <string.h>
 #include <stdlib.h>
 
+/*DataManagement API implementation */
+
+//TODO Separate functions in diferent implementations
+//TODO Convert functions to use Class
+
+/* Cast functions */
+
+//TODO Implement cast functions to all data types
 
 /**
  * 
- * @param s
+ * @param s - Memory adress of variable to make cast to char
  * @return 
  */
 char *castString(void *s) {
@@ -17,25 +25,34 @@ char *castString(void *s) {
 
 /**
  * 
- * @param i
+ * @param i - Memory adress of variable to make cast to int
  * @return 
  */
 int castInt(void *i) {
     return *(int*) i;
 }
 
+/* End of Cast functions */
+
+/* Get functions */
+
+//TODO real necessary functions?
+
+
 /**
  * 
- * @param f
+ * @param f - Memory adress of variable to make cast to float
  * @return 
  */
 int castFloat(void *f) {
     return *(float*) f;
 }
 
+/* Get value functions  */
+
 /**
  * 
- * @param i
+ * @param i - Memory adress of variable to make cast to int 
  * @param storage
  */
 void getInt(void *i, void *storage) {
@@ -67,9 +84,11 @@ void getFloat(void *f, void *storage) {
     *s = *val;
 };
 
+
+
 /**
  * 
- * @param type
+ * @param type type
  * @param reg
  * @param storage
  */
@@ -103,6 +122,10 @@ void getAtributeValue(void * element, FieldAux *aux, const unsigned int atribute
     get(type, element, storage);
 
 };
+
+/* END of Get functions */
+
+/*Print Functions*/
 
 /**
  * 
@@ -163,7 +186,11 @@ void print(const DataType type, const void *const val) {
     }
 }
 
-int searchSigle();
+/*End of Print Functions*/
+
+/*Compare functions*/
+
+
 
 /**
  * 
@@ -240,6 +267,8 @@ bool generalCompare(DataType type_one, void *value_one, DataType type_two, void 
 
 }
 
+
+
 /**
  * 
  * @param varType
@@ -259,16 +288,20 @@ bool compare(DataType varType, void* varValue, DataType toCompareType, void * to
     return toReturn;
 }
 
+/*End of Compare Functions*/
+
+/*Search Functions*/
 /**
  * 
- * @param field
- * @param searchValue
- * @param list
- * @param aux
- * @param elementsNumber
- * @param structTypeSize
- * @param searchValueType
- * @return 
+ * @param field - field number of  the auxStruct 
+ * @param searchValue - memory adress of the search value
+ * @param list - Class data
+ * @param aux - Memory adress of the auxiliary struct 
+ * @param elementsNumber - number of data elements (number of registries)
+ * @param structTypeSize - Size of the Class data type 
+ * @param searchValueType - Type of the search value 
+ * @param resultCounter - Memory adress of a unsigned int variable ,contains the number of registries found  ( query rows number )  
+ * @return a pointer to an array with the keys founded , if 0 founded , return -1 in all array positions 
  */
 int * search(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType, unsigned int *resultCounter, char *signal) {
     unsigned int i = 0, j = 0;
@@ -296,12 +329,20 @@ int * search(const unsigned int field, void *searchValue, void * list, FieldAux 
     return resultKeys;
 };
 
+//TODO search function to only one result
+int searchSigle();
+
+
+/*End of Search Functions*/
+
+/*List Functions*/
+
 /**
- * 
- * @param class
- * @param key
- * @param fields
- * @param fieldsNumber
+ * this method does a parsed list of a registry (one registry + given fields)
+ * @param class - Class (Table)
+ * @param key - number of Class data registry
+ * @param fields - Memory adress of a int array of the chosen Class aux fields
+ * @param fieldsNumber - Number of fields chosen
  */
 void singleParsedList(Class *class, const unsigned int key, int *fields, unsigned fieldsNumber) {
 
@@ -310,10 +351,10 @@ void singleParsedList(Class *class, const unsigned int key, int *fields, unsigne
 }
 
 /**
- * 
- * @param reg
- * @param aux
- * @param field
+ * This method list a field -> value of any Class data 
+ * @param reg - Memory adress of some field 
+ * @param aux - Memory adress of the auxiliary struct 
+ * @param field - Aux field number
  */
 void listRegistry(void * reg, FieldAux *aux, unsigned field) {
     unsigned i, j;
@@ -351,10 +392,13 @@ void listRegistry(void * reg, FieldAux *aux, unsigned field) {
 }
 
 /**
- * This method does a full (full elements + full atributes) list of a given structure
- * @param *list-Pointer to some struct
- * @param structTypeSize-Size of the struct
+ * This method does a full (full elements(keys) + full atributes(fields)) list of a given Class data
  * 
+ * @param list - Memory adress of some Class data struct
+ * @param structTypeSize - Size of the struct type
+ * @param listSize - Number of Class data registries
+ * @param aux - Memory adress of some Class auxiliary struct
+ * @param fieldsNumber - Number of auxiliary struct registries (Number of fields that table contains)
  */
 void fullList(void *list, const unsigned short structTypeSize, const unsigned int listSize, FieldAux *aux, const unsigned int fieldsNumber) {
     unsigned int i = 0, j = 0;
@@ -372,14 +416,14 @@ void fullList(void *list, const unsigned short structTypeSize, const unsigned in
 }
 
 /**
- * 
- * @param list
- * @param structTypeSize
- * @param aux
- * @param elements
- * @param elementsNumber
- * @param fields
- * @param fieldsNumber
+ * This method does a parsed (chosed elements(keys) + chosed atributes(fields)) list of a given Class data
+ * @param list - Memory adress of some Class data struct
+ * @param structTypeSize - Size of the struct type
+ * @param aux - Memory adress of some Class auxiliary struct
+ * @param elements - Memory adress of an array of int keys
+ * @param elementsNumber  - Number of elements in the array gived 
+ * @param fields - Memory adress of array of int fields 
+ * @param fieldsNumber - Number of fields int the array gived 
  */
 void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber) {
     unsigned int i = 0, j = 0;
@@ -395,9 +439,9 @@ void parsedList(void *list, const unsigned short structTypeSize, FieldAux *aux, 
 }
 
 /**
- * 
- * @param perguntaClass
- * @param key
+ * This method does a full list (all the fields) of a Class data registry 
+ * @param class - Memory Adress of some Class (table)
+ * @param key - Key number of the Class data registry that will be listed 
  */
 void singleList(Class *class, const unsigned int key) {
 
@@ -409,6 +453,10 @@ void singleList(Class *class, const unsigned int key) {
     }
     parsedList(class->data, class->StructTypeSize, class->auxStruct, keys, 1, fields, class->fieldsNumber);
 }
+
+/*End of list Functions*/
+
+/*Read Functions*/
 
 /**
  * 
@@ -464,27 +512,14 @@ void read(DataType type, void * field, const unsigned int maxSize) {
     }
 }
 
-bool checkUniqueField(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType) {
-    if (aux[field].unique) {
-        unsigned int resultCounter;
-        char signal[2 + 1];
-        strcpy(signal, "==");
-        search(field, searchValue, list, aux, elementsNumber, structTypeSize, searchValueType, &resultCounter, signal);
-        if (resultCounter == 0) return false;
-        else return true;
-
-    } else {
-        puts("Field isn't unique");
-    }
-}
-
 /**
- * 
- * @param rtype
- * @param reg
- * @param aux
- * @param field
+ * This method read a registy of a given Class data
+ * @param rtype request type ( not implemented )
+ * @param reg the Class data registry
+ * @param aux Memory adress of some Class auxiliary struct
+ * @param field field number of the Class Aux struct  
  */
+
 void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) {
     unsigned i, j;
     for (i = 0; i < field; ++i) {
@@ -529,18 +564,18 @@ void readRegistry(RequestType rtype, void * reg, FieldAux *aux, unsigned field) 
 }
 
 /**
- * 
+ This method does a parsed (chosed elements(keys) + chosed atributes(fields)) read of a given Class data
  * @param rtype
- * @param structTypeSize
- * @param list
- * @param aux
- * @param elements
- * @param elementsNumber
- * @param fields
- * @param fieldsNumber
- */
-
-
+ * @param structTypeSize - Size of the struct type
+ * @param list - Memory adress of some Class data struct
+ * @param aux - Memory adress of some Class auxiliary struct
+ * @param elements - Memory adress of an array of int keys
+ * @param elementsNumber  - Number of elements in the array gived 
+ * @param fields - Memory adress of array of int fields 
+ * @param fieldsNumber - Number of fields int the array gived 
+ * 
+ * 
+*/
 void parsedRead(RequestType rtype, const unsigned short structTypeSize, void *list, FieldAux *aux, int *elements, unsigned elementsNumber, int *fields, unsigned fieldsNumber) {
 
     unsigned int i = 0, j = 0;
@@ -575,6 +610,34 @@ void fullRead(RequestType rType, const unsigned short structTypeSize, void * lis
     puts("---------------------------------------------");
 }
 
+/*End of read Functions*/
+
+/**
+ * This method checks if already exists a given value in a Class data (table) atribute (field) 
+ * @param field
+ * @param searchValue
+ * @param list
+ * @param aux
+ * @param elementsNumber
+ * @param structTypeSize
+ * @param searchValueType
+ * @return 
+ */
+bool checkUniqueField(const unsigned int field, void *searchValue, void * list, FieldAux *aux, const unsigned int elementsNumber, const unsigned int structTypeSize, DataType searchValueType) {
+    if (aux[field].unique) {
+        unsigned int resultCounter;
+        char signal[2 + 1];
+        strcpy(signal, "==");
+        search(field, searchValue, list, aux, elementsNumber, structTypeSize, searchValueType, &resultCounter, signal);
+        if (resultCounter == 0) return false;
+        else return true;
+
+    } else {
+        puts("Field isn't unique");
+    }
+}
+
+
 /**
  * 
  * @param structTypeSize
@@ -595,6 +658,7 @@ void update() {
 void delete() {
 };
 
+/*Function not implemented*/
 /**
  * 
  * @param list
@@ -606,37 +670,7 @@ void elementMemoryAdress(void * list, const unsigned int structTypeSize, const u
     storage = list + (structTypeSize * elementNumber);
 }
 
-
-
-
-/*
-int ordenar(int inf, int sup){
-     int i, j;
-     Pergunta temp;
-
-     while(sup > inf)
-     {
-           i=inf;
-           j=sup;
-           temp = alunos[inf];
-
-           while(i < j){
-                 while(alunos[j].cod_alunos > temp.cod_alunos){
-                       j--;
-                 }
-                 alunos[i] = alunos[j];
-                 while(i < j && alunos[i].cod_alunos <= temp.cod_alunos){
-                       i++;
-                 }
-                 alunos[j] = alunos[i];
-           }
-           alunos[i] = temp;
-           ordenar(inf, i - 1);
-           inf = i + 1;
-     }
-}
- */
-
+/*Function not implemented*/
 /**
  * 
  * @param vet
@@ -659,7 +693,14 @@ int PesquisaBinaria(int vet[], int chave, int Tam) {
     }
     return -1; // não encontrado
 }
-
+/*Function not implemented*/
+/**
+ * 
+ * @param counter
+ * @param array
+ * @param element
+ * @return 
+ */
 int * dele(int *counter, int *array, const unsigned int element) {
     int j;
     for (j = element; j<*counter - 1; j++) {
@@ -669,7 +710,13 @@ int * dele(int *counter, int *array, const unsigned int element) {
     (*counter)--;
     return array;
 }
-
+/**
+ * This function randomize a chosed quantity of numbers , of a given array
+ * @param array - Memory adress of a int array , 
+ * @param n , quantity of numbers that will be returned 
+ * @param limit - array limit
+ * @return  an memory adress of an array of requested number of randomized integers
+ */
 int * randomize(int *array, size_t n, int limit) {
     if (n > 1) {
         size_t i;
